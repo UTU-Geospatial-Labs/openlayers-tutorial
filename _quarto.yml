@@ -1,0 +1,29 @@
+project:
+  type: website
+
+website:
+  title: "OpenLayers Webmap Tutorial"
+
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: https://github.com/UTU-Geospatial-Labs/MAAN7771-openlayers-tutorial
+        text: GitHub
+
+  sidebar:
+    style: "docked"
+    contents:
+      - section: "Tutorial"
+        contents:
+          - 01-getting-started.qmd
+          - 02-creating-a-map.qmd
+          - 03-adding-geoserver.qmd
+          - 04-layer-switcher.qmd
+          - 05-publishing.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true
