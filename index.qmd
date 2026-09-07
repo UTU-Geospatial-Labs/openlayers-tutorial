@@ -1,5 +1,30 @@
 ---
-title: "Course Title"
+title: "OpenLayers Webmap Tutorial"
 ---
 
-Course info & details here
+# OpenLayers Webmap Tutorial
+
+Welcome to the OpenLayers web mapping tutorial.
+
+This tutorial introduces the basic concepts and workflow for
+creating interactive web maps with OpenLayers.
+
+## Learning objectives
+
+After completing this tutorial, you will be able to:
+
+- create an OpenLayers web map;
+- configure a map view;
+- add web map layers;
+- work with GeoServer WMS services;
+- publish a web map using GitHub Pages.
+
+## Getting started
+
+Before starting, make sure that you have installed:
+
+- Node.js
+- Git
+- a code editor such as Visual Studio Code
+
+[Start the tutorial →](01-getting-started.qmd)
