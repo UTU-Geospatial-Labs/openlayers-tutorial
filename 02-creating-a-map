@@ -1,1 +1,65 @@
+</> Markdown
 
+## 3. Edit the webmap
+
+This tutorial follows [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) example from OpenLayers repository. This example shows how to bring layers from Geoserver to your webmap.
+
+Copy-and-paste the codes in the example files `index.html`, `main.js` and `package.json` to your corresponding files. Save the changes with CTRL+S. Open your locally hosted webmap by clicking the given URL in your terminal (e.g. http://localhost:5173). You should see the same webmap as in the example.
+
+
+Do the following edits to the example code and save (CTRL+S):
+
+### main.js
+
+```javascript
+new ImageLayer({
+    extent: [3228700, -1381359, 4567834, -162868],
+    source: new ImageWMS({
+      url: 'https://geo-maa.utu.fi/geoserver/wms',
+      params: {'LAYERS': 'tanzania:tanzania_forest_reserves_2020'},
+      ratio: 1,
+      serverType: 'geoserver',
+    }),
+  }),
+```
+Here, the 
+- `extent` contains coordinates of the top-right and bottom-left corners of a bounding box that covers the whole country of Tanzania.
+- `url` is changed to our course Geoserver
+- `params` are changed to direct to Workspace called "tanzania" and a published layer called "tanzania_forest_reserves_2020"
+
+```javascript
+const map = new Map({
+  layers: layers,
+  target: 'map',
+  view: new View({
+    center: [3862074, -732904],
+    zoom: 6,
+  }),
+});
+```
+Here, the
+- `center` is changed to coordinates of a point in the middle of Tanzania
+- `zoom` is changed slightly larger to get a closer view of Tanzania
+
+
+### index.html
+
+```html
+    <style>
+      .map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+    </style>
+```
+Here, the size of the map window is changed to full screen.
+
+
+### Adding a legend
+
+The simple legend in this example webmap was added with the great [LayerSwitcher plugin](https://github.com/walkermatt/ol-layerswitcher?tab=readme-ov-file). Check the full codes at the end of this README to see the plugin in action. There are many other plugins as well that provide features for OpenLayers webmaps. Explore and try out!
+
+Note that activating LayerSwitcher plugin functionalities require running `npm install ol-layerswitcher --save` command in your terminal. 
