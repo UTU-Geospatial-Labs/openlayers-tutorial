@@ -5,3 +5,23 @@ title: "Getting started"
 # Getting started
 
 In this section, we will create a basic OpenLayers project.
+
+## 1. Install the required software
+
+You will need:
+
+- Node.js
+- Git
+- a code editor such as Visual Studio Code
+
+For the OpenLayers-specific setup, see the
+[OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.html).
+
+## 2. Create the project
+
+Open a terminal and create a new OpenLayers application:
+
+```{bash}
+npm create ol-app my-app
+cd my-app
+npm start
