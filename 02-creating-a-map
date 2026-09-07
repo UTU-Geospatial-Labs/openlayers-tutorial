@@ -1,5 +1,9 @@
 </> Markdown
 
+---
+title: "3. Edit the webmap"
+---
+
 ## 3. Edit the webmap
 
 This tutorial follows [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) example from OpenLayers repository. This example shows how to bring layers from Geoserver to your webmap.
