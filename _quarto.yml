@@ -18,9 +18,6 @@ website:
         contents:
           - 01-getting-started.qmd
           - 02-creating-a-map.qmd
-          - 03-adding-geoserver.qmd
-          - 04-layer-switcher.qmd
-          - 05-publishing.qmd
 
 format:
   html:
