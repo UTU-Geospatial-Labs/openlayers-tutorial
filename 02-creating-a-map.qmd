@@ -1,5 +1,3 @@
-</> Markdown
-
 ---
 title: "3. Edit the webmap"
 ---
