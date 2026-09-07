@@ -8,7 +8,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: https://github.com/UTU-Geospatial-Labs/MAAN7771-openlayers-tutorial
+      - href: https://github.com/UTU-Geospatial-Labs/openlayers-tutorial
         text: GitHub
 
   sidebar:
