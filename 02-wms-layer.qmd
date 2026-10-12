@@ -1,0 +1,45 @@
+---
+title: 2 - WMS layer
+---
+
+## 2.1. Bring ready-made code from OL repository
+
+Start populating the webmap files. First, we'll follow this OpenLayers example: [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) from their repository. This example shows how to bring WMS layers from Geoserver to your webmap.
+
+Copy-and-paste the codes in the example files `index.html` and `main.js` to your corresponding files. Save the changes (in VS Code with CTRL+S). Once saved, you should see the same webmap as in the example via your local server URL.
+
+
+2.2. Edit the code for Tanzania
+
+Now, change the WMS layer (US states) to Tanzania International Conservation areas 2026. This layer originates from Protected Planet [LINK], but it is chopped into thematic layers and re-published via Climate Risk Database. Navigate to Tanzania Ramsar sites, click open properties, and then copy OGC web service (note: ows) URL. You may paste it at the end of your code as such to keep safe for editing a bit before adding it to the code. Just remember to delete the temporary URL placement afterwards. 
+
+This URL contains all information we need to replace the US states data to Tanzania world heritage and Ramsar sites data. However, instead ows, we can use wms: https://crd.resilienceacademy.ac.tz/geoserver/wms
+Params: geonode:tanzania_international_conservation_areas_2026 (note: here the geonode is the workspace the layer is published in in Geoserver).
+
+https://crd.resilienceacademy.ac.tz/geoserver/geonode/tanzania_international_conservation_areas_2026/ows 
+
+To make the layer visible, you will also need to define the extent of the layer (boundig box). Now, you can just copy-paste the bounding box coordinates from below to your code. Save and view changes. 
+
+The map is on the US, the US states layer has disappeared. But is our newly brought data there? If you drag the map to Tanzania, you do indeed see the layer! in the next section, you'll edit the map view to match this layer.
+
+Do the following edits to the example code and save:
+
+### main.js
+
+```javascript
+new ImageLayer({
+    extent: [3228700, -1381359, 4567834, -162868],
+    source: new ImageWMS({
+      url: 'https://crd.resilienceacademy.ac.tz/geoserver/wms',
+      params: {'LAYERS': 'geonode:tanzania_international_conservation_areas_2026'},
+      ratio: 1,
+      serverType: 'geoserver',
+    }),
+  }),
+```
+Here, the 
+- `extent` contains coordinates of the top-right and bottom-left corners of a bounding box that covers the whole country of Tanzania.
+- `url` is changed to our course Geoserver
+- `params` are changed to direct to Workspace called "tanzania" and a published layer called "tanzania_forest_reserves_2020"
+
+[LINK TO NEXT]
