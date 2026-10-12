@@ -1,40 +1,99 @@
+
+
 ---
 title: "OpenLayers webmap tutorial"
+subtitle: "A hands-on guide to creating, configuring and publishing interactive webmaps"
 ---
-## Creating, configuring and publishing an OpenLayers webmap
 
-*This tutorial has been created for learning purposes.*
+::: {.home-intro}
 
-Welcome to the OpenLayers webmapping tutorial! In this tutorial, you will build an interactive webmap using OpenLayers, an open-source JavaScript library for displaying geospatial data in a web browser.
+<div class="eyebrow">UTU Geospatial Labs · Open learning resource</div>
+
+# Build your own interactive webmap
+
+Learn how to create a webmap from the ground up using **OpenLayers**, an open-source JavaScript library for web mapping.
 
 You will start with a basic map and gradually develop it by adding geospatial data, adjusting the map view, styling layers and building interface elements. By the end, you will have a working webmap that you can publish online.
 
-You do not need to be an experienced programmer to complete the exercises. However, you should be comfortable working with files and folders, and be prepared to edit some HTML, CSS and JavaScript code.
+**You do not need to be an experienced programmer to complete the exercises.** However, you should be comfortable working with files and folders, and be prepared to edit some HTML, CSS and JavaScript code.
 
 
-## Learning objectives
-After completing this tutorial, you have learned:
-- How to initiate an OpenLayers file structure, and how to edit the key files for creating an interactive webmap. 
-- Where to find resources for adding UI elements to your webmap, and how to modify them to be suitable for your project.
-- How to bring data layers from various data sources to your webmap, and attribute them accordingly. 
-- How to utilise GitHub pages for serving your OpenLayers webmap to the world. 
+[Start the tutorial →](01-setup.qmd){.btn .btn-primary .btn-lg}
 
+<div class="map-preview">
+  <iframe
+    src="webmap/"
+    title="Interactive OpenLayers webmap example"
+    loading="lazy">
+  </iframe>
+</div>
 
-## Structure
-This tutorial has been divided into thematic sections, each bringing a new element to your webmap. 
+[Explore the finished webmap](webmap/){.btn .btn-outline-secondary .btn-lg}
 
-- 01 Setup - Installing needed software for initiating an OpenLayers webmap file structure
-- 02 WMS layer - Add a WebMapService layer
-- 03 Map view - Edit the map window
-- 04 GeoJSON layers - Add local GeoJSON layers
-- 05 Vector styles - Edit GeoJSON layer styles
-- 06 Basemap switcher - Switch between two basemap options
-- 07 Legend - Create legend that match layer styles
-- 08 Title - Edit map title
-- 09 Info panel - Add a toggled abstract
-- 10 Publish - Publish the finished webmap on GitHub Pages
+:::
 
+## What you will learn
 
-[Here the final map, embedded]
+::: {.grid}
 
-[Start the tutorial →](01-setup.qmd)
+::: {.g-col-12 .g-col-md-4}
+::: {.learning-card}
+
+### Add geospatial data
+
+Load a WMS layer from a remote geospatial service and display local GeoJSON datasets.
+
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4}
+::: {.learning-card}
+
+### Configure the map
+
+Adjust the map view, style vector layers, switch basemaps and build a legend.
+
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4}
+::: {.learning-card}
+
+### Build and publish
+
+Add a title and information panel, then publish the finished application using GitHub Pages.
+
+:::
+:::
+
+:::
+
+## The tutorial
+
+Work through the chapters in order. Each chapter introduces a new element of the webmap and builds on the code from the previous exercise.
+
+| Chapter | Topic |
+|:--|:--|
+| 01 | Setup and project structure |
+| 02 | Add a WMS layer |
+| 03 | Configure the map view |
+| 04 | Add GeoJSON layers |
+| 05 | Style vector layers |
+| 06 | Add a basemap switcher |
+| 07 | Create a legend |
+| 08 | Add a map title |
+| 09 | Create an information panel |
+| 10 | Publish the webmap |
+
+## Before you begin
+
+You will need a code editor, Node.js and a basic understanding of working with files and folders. You will edit HTML, CSS and JavaScript as you progress through the exercises.
+
+Start with [Chapter 1: Setup](01-setup.qmd) to prepare your working environment.
+
+## About this resource
+
+This tutorial is a practical learning resource used in Master's level Geography teaching at the University of Turku. It is maintained by UTU Geospatial Labs.
+
+- [Visit the tutorial repository on GitHub](https://github.com/UTU-Geospatial-Labs/openlayers-tutorial)
+- [Learn more about OpenLayers](https://openlayers.org/)
