@@ -3,33 +3,32 @@ project:
 
 website:
   title: "OpenLayers Webmap Tutorial"
-  description: "Hands-on tutorial for creating, configuring and publishing interactive webmaps with OpenLayers"
+  description: "A practical tutorial for creating, configuring and publishing interactive webmaps with OpenLayers."
 
   navbar:
-    logo: images/utu-logo.jpg
+    logo: images/utu-logo.svg
     logo-alt: "University of Turku"
-    title: "UTU Geospatial Labs"
+    title: "Geospatial Labs"
     background: "#ffffff"
     foreground: "#183653"
     collapse-below: lg
-      left:
-        - href: index.qmd
-          text: Home
-        - href: https://opas.peppi.utu.fi/en/course/MAAN7771/100913?period=2024-2027
-          text: MAAN7771: Geospatial data management and visualisation (10 ECTS)
-        - href: https://github.com/UTU-Geospatial-Labs/openlayers-tutorial
-          text: GitHub
-      right: 
-        - icon: github
-          href: https://github.com/UTU-Geospatial-Labs/openlayers-tutorial
-          aria-label: "Open the tutorial repository in GitHub"
-      
+    left:
+      - href: index.qmd
+        text: Home
+      - href: "YOUR_MASTERS_COURSE_URL"
+        text: Master's course
+      - href: "https://github.com/UTU-Geospatial-Labs/openlayers-tutorial"
+        text: GitHub
+    right:
+      - icon: github
+        href: "https://github.com/UTU-Geospatial-Labs/openlayers-tutorial"
+        aria-label: "Open the tutorial repository on GitHub"
 
   sidebar:
-    style: "docked"
+    style: docked
     search: true
     contents:
-      - section: "Navigation"
+      - section: "Tutorial"
         contents:
           - 01-setup.qmd
           - 02-wms-layer.qmd
@@ -43,11 +42,11 @@ website:
           - 10-publish.qmd
           - references.qmd
 
-    page-footer: 
-      left: |
-        OpenLayers Webmap Tutorial · UTU Geospatial Labs
-      right: |
-        [Source code](https://github.com/UTU-Geospatial-Labs/openlayers-tutorial)
+  page-footer:
+    left: |
+      OpenLayers Webmap Tutorial · UTU Geospatial Labs
+    right: |
+      [Source code](https://github.com/UTU-Geospatial-Labs/openlayers-tutorial)
 
   repo-url: https://github.com/UTU-Geospatial-Labs/openlayers-tutorial
   repo-actions: [source]
