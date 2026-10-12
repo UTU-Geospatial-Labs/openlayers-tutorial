@@ -42,4 +42,5 @@ Here, the
 - `url` is changed to our course Geoserver
 - `params` are changed to direct to Workspace called "tanzania" and a published layer called "tanzania_forest_reserves_2020"
 
-[LINK TO NEXT]
+
+[Next: Display WMS layer on the map →](02-wms-layer.qmd)
