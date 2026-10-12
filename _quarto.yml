@@ -16,8 +16,17 @@ website:
     contents:
       - section: "Tutorial"
         contents:
-          - 01-getting-started.qmd
-          - 02-creating-a-map.qmd
+          - 01-setup.qmd
+          - 02-wms-layer.qmd
+          - 03-map-view.qmd
+          - 04-geojson-layers.qmd
+          - 05-vector-styles.qmd
+          - 06-basemap-switcher.qmd
+          - 07-legend.qmd
+          - 08-title.qmd
+          - 09-info-panel.qmd
+          - 10-publish.qmd
+          - references.qmd
 
 format:
   html:
