@@ -3,7 +3,14 @@ title: "OpenLayers webmap tutorial"
 ---
 ## Creating, configuring and publishing an OpenLayers webmap
 
-Welcome to the OpenLayers web mapping tutorial. This tutorial has been created for learning purposes. 
+*This tutorial has been created for learning purposes.*
+
+Welcome to the OpenLayers webmapping tutorial! In this tutorial, you will build an interactive webmap using OpenLayers, an open-source JavaScript library for displaying geospatial data in a web browser.
+
+You will start with a basic map and gradually develop it by adding geospatial data, adjusting the map view, styling layers and building interface elements. By the end, you will have a working webmap that you can publish online.
+
+You do not need to be an experienced programmer to complete the exercises. However, you should be comfortable working with files and folders, and be prepared to edit some HTML, CSS and JavaScript code.
+
 
 ## Learning objectives
 After completing this tutorial, you have learned:
