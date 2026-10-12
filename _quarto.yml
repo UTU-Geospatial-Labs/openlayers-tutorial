@@ -6,7 +6,7 @@ website:
   description: "A practical tutorial for creating, configuring and publishing interactive webmaps with OpenLayers."
 
   navbar:
-    logo: images/utu-logo.svg
+    logo: ./images/utu-logo.svg
     logo-alt: "University of Turku"
     title: "Geospatial Labs"
     background: "#ffffff"
