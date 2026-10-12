@@ -2,33 +2,39 @@
 title: "Setup"
 ---
 
-# Getting started
+1. Install required software
+If you don't have the required software installed already, start with those:
+- A code editing software
+- Node.js (14 or higher): https://nodejs.org/en
+- Git: https://github.com/git-guides/install-git (note: you may install Git via Visual Studio Code, too)
 
-### Concepts
-- OpenLayers
-- Vite
-- npm
-- project structure
+This tutorial has been created with Visual Studio Code, and the latest versions of Node and Git. Screenshots from Visual Studio Code contain elements that most code editing software have, they may just be in different places or look a bit different (such as Terminal and opening folders). 
+
+2. Create working folder
+Create an empty working folder called "webmap" (or anything you like) on your device or cloud, e.g. C:\Users\OneDrive\webmap or C:\Users\your-account\webmap
+
+Open that folder in your code editing software. In VS Code File --> Open Folder... --> Navigate to your \webmap folder, and open it in the software.
+
+[Image of opening folder in VS Code]
 
 
-In this section, we will create a basic OpenLayers project.
+2. OpenLayers Quick start
 
-## 1. Install the required software
+Follow [OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.html) to initiate your webmap directory inside your working folder. 
 
-You will need:
+For running the npm commands, you need to open a Terminal. In VS Code, a terminal that runs commands inside your working webmap folder is opened via Terminal --> New Terminal
 
-- Node.js
-- Git
-- a code editor such as Visual Studio Code
+Once hitting the command npm start, you'll be given an url (server that runs the webmap on your local device) where you can view the webmap while you develop it. This is just a local serving of the webmap, and you can view it only locally on your device. 
 
-For the OpenLayers-specific setup, see the
-[OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.html).
+[Image of terminal opening in VS Code]
 
-## 2. Create the project
 
-Open a terminal and create a new OpenLayers application:
+3. Explore the basic file structue
 
-```{bash}
-npm create ol-app my-app
-cd my-app
-npm start
+The main files you will be working with in this tutorial are main.js, index.html and style.css. Each of these already contain some code, so you won't have to start from complete scratch. Open the local server URL to see how the webmap looks now. Just an OpenStreetMap base map of the world. 
+
+You can also view the webmap by opening the index.html file in your browser. However, you will most likely encounter a bunch of blocked OSM tiles with a warning. This is due to OSM server usage policies to prevent exessive usage of their volunteer-run servers. The OSM tiles will be visible when publishing the webmap, but a bit annoying to look at them in the development stage. Thus, using a local server is recommended to avoid the warnings and actually display the webmap. Read more about OSM policies: [the link to the osm wiki blocked]. 
+
+[Screenshot of the blank webmap]
+
+
