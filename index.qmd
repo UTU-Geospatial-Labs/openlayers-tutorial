@@ -1,24 +1,33 @@
 ---
-title: "Creating, configuring and publishing OpenLayers webmap"
+title: "OpenLayers webmap tutorial"
 ---
+## Creating, configuring and publishing an OpenLayers webmap
 
-# OpenLayers Webmap Tutorial
-
-Welcome to the OpenLayers web mapping tutorial.
-
-This tutorial introduces the basic concepts and workflow for
-creating interactive webmaps with OpenLayers.
+Welcome to the OpenLayers web mapping tutorial. This tutorial has been created for learning purposes. 
 
 ## Learning objectives
+After completing this tutorial, you have learned:
+- How to initiate an OpenLayers file structure, and how to edit the key files for creating an interactive webmap. 
+- Where to find resources for adding UI elements to your webmap, and how to modify them to be suitable for your project.
+- How to bring data layers from various data sources to your webmap, and attribute them accordingly. 
+- How to utilise GitHub pages for serving your OpenLayers webmap to the world. 
 
-After completing this tutorial, you will be able to:
 
-- create an OpenLayers web map;
-- configure a map view;
-- add web map layers;
-- work with GeoServer WMS services;
-- publish a web map using GitHub Pages.
+## Structure
+This tutorial has been divided into thematic sections, each bringing a new element to your webmap. 
+
+- 01 Setup - Installing needed software for initiating an OpenLayers webmap file structure
+- 02 WMS layer - Add a WebMapService layer
+- 03 Map view - Edit the map window
+- 04 GeoJSON layers - Add local GeoJSON layers
+- 05 Vector styles - Edit GeoJSON layer styles
+- 06 Basemap switcher - Switch between two basemap options
+- 07 Legend - Create legend that match layer styles
+- 08 Title - Edit map title
+- 09 Info panel - Add a toggled abstract
+- 10 Publish - Publish the finished webmap on GitHub Pages
+
 
 [Here the final map, embedded]
 
-[Start the tutorial →](01-getting-started.qmd)
+[Start the tutorial →](01-setup.qmd)
