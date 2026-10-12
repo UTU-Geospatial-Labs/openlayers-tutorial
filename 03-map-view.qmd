@@ -1,1 +1,49 @@
+---
+title: 3 - Map view
+---
+
+Edit the map window size and its default view.
+
+We want the map to pan to Tanzania directly when it loads. Scroll down in main.js to section where the map itself is configured (const map = new Map({). Here, edit the center and zoom of the map view. Center should be coordinates of the center point of the map that loads when opened. We can use approximately the center point of Tanzania. Zoom was initially 8, but change it to 6 as tanzania is a bit smaller coutnry than the US, and we would like the map to be zoomed in a bit more. Save.
+
+```javascript
+const map = new Map({
+  layers: layers,
+  target: 'map',
+  view: new View({
+    center: [3862074, -732904],
+    zoom: 6,
+  }),
+});
+```
+Here, the
+- `center` is changed to coordinates of a point in the middle of Tanzania
+- `zoom` is changed slightly larger to get a closer view of Tanzania
+
+Once at it, edit the map window, too. Go to style.css file and add the following code that defines the map window to be full screen (instead of just a half-page). There is nothing much in the style.css file, and add this block just at the end of the existing code. 
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+Open index.html. There you see a similar block of code inside the <style> section. Indeed, we CAN define the map window here as well, but for elegancy, we'll use styles.css for any styling elements and just refer to them in the index.html. This is to prevent the index.html expanding too much. 
+
+Delete the code inside <style> and instead, add a reference to the style.css code like this:
+
+!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Tanzania forest reserves and conservation areas</title>
+
+    <!-- This is custom stylesheet that refers to our style.css file -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+As you can see, here you can also change the title of your webmap project. Change the Simgle image WMS to "Tanzania forest reserves and conservation areas". This title will be visible in the browser tab when you open the webmap. 
+
 
