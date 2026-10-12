@@ -2,39 +2,77 @@
 title: 1 - Setup
 ---
 
-1. Install required software
-If you don't have the required software installed already, start with those:
-- A code editing software
-- Node.js (14 or higher): https://nodejs.org/en
-- Git: https://github.com/git-guides/install-git (note: you may install Git via Visual Studio Code, too)
+## 1.1. Install required software
 
-This tutorial has been created with Visual Studio Code, and the latest versions of Node and Git. Screenshots from Visual Studio Code contain elements that most code editing software have, they may just be in different places or look a bit different (such as Terminal and opening folders). 
+You will need the following software:
 
-2. Create working folder
-Create an empty working folder called "webmap" (or anything you like) on your device or cloud, e.g. C:\Users\OneDrive\webmap or C:\Users\your-account\webmap
+- **Visual Studio Code (VS Code)** or another code editor of your choice.
+- **Node.js** (14 or higher), which includes npm, the package manager used to install project dependencies.
+- **Git**, which is useful for version control and working with GitHub.
 
-Open that folder in your code editing software. In VS Code File --> Open Folder... --> Navigate to your \webmap folder, and open it in the software.
+Install the lat4est version of Node.js from [the official Node.js website](https://nodejs.org/en). Install Git from [the Git website](https://git-scm.com/install).
 
-[Image of opening folder in VS Code]
+This tutorial uses Visual Studio Code, but most code editors provide the same functionalities. The screenshots therefore show VS Code interfave, and the layout may differ if you use another editor. No extensions are used in this tutorial, but if you like to use any, feel free to use them as you like.
 
 
-2. OpenLayers Quick start
 
-Follow [OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.html) to initiate your webmap directory inside your working folder. 
+## 1.2. Create a working folder
 
-For running the npm commands, you need to open a Terminal. In VS Code, a terminal that runs commands inside your working webmap folder is opened via Terminal --> New Terminal
+Create a folder on your computer for your webmap project. You can call it `webmap` or choose another name. Cloud locations work too.
 
-Once hitting the command npm start, you'll be given an url (server that runs the webmap on your local device) where you can view the webmap while you develop it. This is just a local serving of the webmap, and you can view it only locally on your device. 
+Open the code editing software and open the empty webmap folder in there. Usually by **File → Open Folder...**. Navigate to your new folder and open it.
 
-[Image of terminal opening in VS Code]
+You will use this folder to store the webmap code and geospatial data files displayed on the map.
+
+[*Open a working folder in VS Code*](images/1-2_open-folder.png)
 
 
-3. Explore the basic file structue
 
-The main files you will be working with in this tutorial are main.js, index.html and style.css. Each of these already contain some code, so you won't have to start from complete scratch. Open the local server URL to see how the webmap looks now. Just an OpenStreetMap base map of the world. 
+## 1.3. Set up the OpenLayers application
 
-You can also view the webmap by opening the index.html file in your browser. However, you will most likely encounter a bunch of blocked OSM tiles with a warning. This is due to OSM server usage policies to prevent exessive usage of their volunteer-run servers. The OSM tiles will be visible when publishing the webmap, but a bit annoying to look at them in the development stage. Thus, using a local server is recommended to avoid the warnings and actually display the webmap. Read more about OSM policies: [the link to the osm wiki blocked]. 
+Follow the [OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.html) to create a basic OpenLayers application and the required file structure in your working folder.
 
-[Screenshot of the blank webmap]
+Open a terminal in your code editing software, often via **Terminal → New Terminal**. Make sure the terminal is working in your project folder before running the commands in the Quick Start guide (the terminal path should end with *...\webmap*). If everything is fine, run the commands in the exact order.
 
+The setup creates the files and installs the dependencies needed to run the application. We will build on this starting point throughout the tutorial.
+
+After you run `npm start`, you may be prompted with action suggestions. Feel free to run those, but often they are not a necessity for the OpenLayers application to run. 
+
+If everything goes well, the terminal will display a local development server address, typically `http://localhost:5173/`. Open this address in your browser to view the default webmap.
+
+!The development server allows you to test your changes locally while you work. The map is not yet published online.!
+
+*Screenshot 2: VS Code terminal showing the development server running and the local address WITH a screenshot of the blank OSM basemap of the world.*
+
+
+
+## 1.4. Explore the project files
+
+Take a moment to explore the files created by the setup.
+
+- `index.html` defines the basic structure of the web page and provides a container for the map.
+- `main.js` contains the JavaScript code that creates and configures the map.
+- `style.css` controls the appearance and layout of the page and map.
+
+Each of the files above already contain some code, so you won't have to start from scratch. Once you open the local development server URL in your browser (or code editing software), you should see a basic OpenStreetMap basemap.
+
+**Important:** Do not open `index.html` directly from your file system as your main way of testing the map. Use the local development server instead. Some web resources and JavaScript modules require a server, and direct file access can cause errors. The OpenStreetMap tile service also has usage policies, so avoid unnecessary requests to its servers.
+
+*However, you will most likely encounter a bunch of blocked OSM tiles with a warning. This is due to OSM server usage policies to prevent exessive usage of their volunteer-run servers. The OSM tiles will be visible when publishing the webmap, but a bit annoying to look at them in the development stage. Thus, using a local server is recommended to avoid the warnings and actually display the webmap. Read more about OSM policies: [the link to the osm wiki blocked]. *
+
+*Screenshot 3: The initial webmap displayed in a browser, with the local address visible.*
+
+
+### Checkpoint
+
+Before continuing, make sure that:
+
+- The project folder is open in your code editor.
+- The development server starts without errors.
+- The local webmap opens in your browser and displays a basemap.
+
+If the map does not appear, check the terminal for error messages before proceeding.
+
+
+[LINK TO NEXT SECTION]
 
