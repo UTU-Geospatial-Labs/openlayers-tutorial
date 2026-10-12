@@ -15,7 +15,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: "YOUR_MASTERS_COURSE_URL"
+      - href: "https://opas.peppi.utu.fi/en/course/MAAN7771/100913?period=2024-2027"
         text: Master's course
       - href: "https://github.com/UTU-Geospatial-Labs/openlayers-tutorial"
         text: GitHub
@@ -28,7 +28,7 @@ website:
     style: docked
     search: true
     contents:
-      - section: "Tutorial"
+      - section: "Chapters"
         contents:
           - 01-setup.qmd
           - 02-wms-layer.qmd
