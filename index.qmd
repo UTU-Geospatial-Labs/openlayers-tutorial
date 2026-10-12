@@ -20,15 +20,17 @@ You will start with a basic map and gradually develop it by adding geospatial da
 
 [Start the tutorial →](01-setup.qmd){.btn .btn-primary .btn-lg}
 
-<div class="map-preview">
-  <iframe
-    src="webmap/"
-    title="Interactive OpenLayers webmap example"
-    loading="lazy">
-  </iframe>
-</div>
+<iframe
+  src="https://utu-geospatial-labs.github.io/openlayers-webmap/"
+  title="Interactive webmap of Tanzania forest reserves and conservation areas"
+  width="100%"
+  height="600"
+  style="border: 1px solid #dce4eb; border-radius: 8px;"
+  loading="lazy"
+  allowfullscreen>
+</iframe>
 
-[Explore the finished webmap](webmap/){.btn .btn-outline-secondary .btn-lg}
+[Open the webmap in a separate tab](https://utu-geospatial-labs.github.io/openlayers-webmap/).
 
 :::
 
