@@ -15,6 +15,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: https://opas.peppi.utu.fi/en/course/MAAN7771/100913?period=2024-2027
+        text: MAAN7771: Geospatial data management and visualisation (10 ECTS)
       - href: https://github.com/UTU-Geospatial-Labs/openlayers-tutorial
         text: GitHub
     right: 
