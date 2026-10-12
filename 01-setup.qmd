@@ -1,8 +1,15 @@
 ---
-title: "Getting started"
+title: "Setup"
 ---
 
 # Getting started
+
+### Concepts
+- OpenLayers
+- Vite
+- npm
+- project structure
+
 
 In this section, we will create a basic OpenLayers project.
 
