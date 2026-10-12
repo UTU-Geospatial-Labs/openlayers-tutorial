@@ -8,7 +8,7 @@ website:
   navbar:
     logo: ./images/utu-logo.jpg
     logo-alt: "University of Turku"
-    title: "Geospatial Labs"
+    title: "UTU Geospatial Labs"
     background: "#ffffff"
     foreground: "#183653"
     collapse-below: lg
