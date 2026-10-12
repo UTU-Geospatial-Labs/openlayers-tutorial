@@ -16,7 +16,7 @@ https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1105
 
 Open the Tanzania Forest reserves 2023 dataset --> Download --> Export Data --> Format GeoJSON --> A raw .json formatted file should appear as a new tab in your browser (if it did not download automatically). Save the file to the newly created data folder inside your webmap working folder. Rename the “result.json” to tanzania_forest_reserves_2022.json”. Do the same for the tanzania national parks 2023 dataset. 
 
-![Download data from Climate Risk Database](images/4-1_donwload-geojson.png)
+![Download data from Climate Risk Database](images/4-1_download-geojson.png)
 
 Note: Depending on the browser you are using, saving this .json file can work a bit differently. Might be that you can save the raw data file by right-clicking the browser window and Save with name... (or something else that allows you to browse a location for the saved result.json file), or there may be a Save button in the top-panel of your browser. Google will help you if you can not find a way to save the file!
 
