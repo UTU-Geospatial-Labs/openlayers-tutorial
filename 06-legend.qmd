@@ -2,6 +2,29 @@
 title: 6 - Legend
 ---
 
+[INTRODUCTION TEXT]
+
+## 7.1. Create the legend container
+
+We want our map legend to explain what the symbols and colours on the map represent. We will place a legend in the top-right corner of the map.
+
+The legend consists of two parts: 
+- In `index.html`, we define the HTML elements and the text that users will see. 
+- In `style.css`, we define the position and appearance of the legend and its items.
+
+- [ ] First, add the basic legend container to the HTML file.
+
+```html
+<!-- Map legend -->
+      <div id="legend">
+        Some stuff for our legend.
+    </div>
+```
+
+Save the `index.html` file and preview the changes on your webmap. See the small text in the upper-right corner? That's your legend (for now)!
+
+- [ ] Next, open your `style.css` file. Add the following code block to the end of the existing code:
+
 ```css
 /* ----------------------------------------
     Legend
@@ -32,57 +55,18 @@ title: 6 - Legend
 }
 ```
 
-EXPLANATIONS OF THE CODE BLOCKS HERE!
+Here, the `#legend {` defines how the legend container looks like - a white box with some shadow and other tweaks. `z-index: 10` makes sure the legend is written on top of the map.
+
+`#legend p {` on the other hand defines how the normal paragraph text inside the legend will be spaced.
+
+`.legend-item {}` defines placement of the coloe boxes that match with our layers' visualisation.
 
 
-## Add layer styles to legend
+## 7.2. Add symbols for the map layers
 
-```css
-/* ----------------------------------------
-    Legend symbols (match with layer visualisation)
----------------------------------------- */
-/* Forest reserve categories */
-.forest-reserve {
-  background: #006b00;
-}
+The legend needs a symbol and a label for each category. We will use small coloured boxes for the forest reserve categories and patterned boxes for national parks and international conservation areas.
 
-.forest-plantation {
-  background: #d3f226;
-}
-
-.nature-reserve {
-  background: #81bf00;
-}
-
-.village-reserve {
-  background: #56cf68;
-}
-/* National parks layer */
-.national-park {
-  background: repeating-linear-gradient(
-    45deg,
-    #000000,
-    #000000 1px,
-    transparent 1px,
-    transparent 7px
-  );
-  border: 1px solid #000000;
-}
-
-/* International conservation areas layer */
-.international-area {
-  background: repeating-linear-gradient(
-    135deg,
-    #000000,
-    #000000 1px,
-    transparent 1px,
-    transparent 7px
-  );
-  border: 1px solid #000000;
-}
-```
-
-EXPLANATIONS! And some tasks? E.g. defining correct colors?
+In `index.html`, add a legend item for each category. Each item contains a symbol element and a text label. In `style.css`, use classes to define the appearance of the symbols.
 
 ```html
 <!-- Map legend -->
@@ -142,10 +126,62 @@ EXPLANATIONS! And some tasks? E.g. defining correct colors?
       </div>
     </div>
 ```
+Save and preview.
 
-THE LEGEND CONFIGURATION IN HTML FILE. THE BASEMAP SWITCHER SHOULD NOT BE HERE YET, BECAUSE THIS CHAPTER COMES BEFORE THAT.
 
-Perhaps the sections could be added to this code in sections, and not all at once?
+The class names connect the HTML elements to their CSS styles. For example, the `forest-reserve` class applies the colour defined by `.forest-reserve` in the `style.css` stylesheet.
 
-Also, the whole code is needed so students see where the legend is placed inside this html.
+Make sure the legend colours and patterns match the styles you created in Chapter 5. If you change a layer's style, update its legend symbol as well.
 
+- [ ] Copy the following CSS code and paste it at the end of your `style.css` file:
+
+```css
+/* ----------------------------------------
+    Legend symbols (match with layer visualisation)
+---------------------------------------- */
+/* Forest reserve categories */
+.forest-reserve {
+  background: #006b00;
+}
+
+.forest-plantation {
+  background: #d3f226;
+}
+
+.nature-reserve {
+  background: #81bf00;
+}
+
+.village-reserve {
+  background: #56cf68;
+}
+/* National parks layer */
+.national-park {
+  background: repeating-linear-gradient(
+    45deg,
+    #000000,
+    #000000 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  border: 1px solid #000000;
+}
+
+/* International conservation areas layer */
+.international-area {
+  background: repeating-linear-gradient(
+    135deg,
+    #000000,
+    #000000 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  border: 1px solid #000000;
+}
+```
+
+
+## Checkpoint?
+
+
+[Next: Create a basemap switcher →](07-basemap-switcher.qmd)
