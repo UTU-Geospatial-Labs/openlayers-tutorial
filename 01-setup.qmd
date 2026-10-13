@@ -2,70 +2,65 @@
 title: 1 - Setup
 ---
 
+In this chapter, you will set up your project and run a basic OpenLayers map on your own device. By the end, you should have a working local webmap and know which files control its structure, behaviour and appearance.
+
+
 ## 1.1. Install required software
 
-You will need the following software:
+You will need:
 
-- **Code editing software**
-- **Node.js** (14 or higher), which includes *npm*, the package manager used to install project dependencies.
-- **Git**, which is useful for version control and working with GitHub.
+- **A code editor.** This tutorial uses [Visual Studio Code](https://code.visualstudio.com/).
+- [**Node.js**](https://nodejs.org/en)(14 or higher), which includes *npm*, the package manager used to install project dependencies.
+- [**Git**](https://git-scm.com/downloads), which is useful for version control and working with GitHub.
 
-Install the latest version of Node.js from [the official Node.js website](https://nodejs.org/en). Install Git from [the Git website](https://git-scm.com/install).
+Follow the installation instructions on the official websites. If you already have these tools installed, proceed to the next task!
 
 ::: {.callout-note}
-This tutorial uses **Visual Studio Code** as the code editing software, but other code editors provide all the functionalities you need to complete this practical. However, screenshots in this tutorial therefore show VS Code interface, and the layout may differ if you use another editor. No extensions are used in this tutorial, but if you like to use any, feel free to use them as you like.
+Screenshots in this tutorial show Visual Studio Code interface. Other code editors work too, but menus and terminal locations may differ. No extensions are used in this tutorial, but if you like to use any, feel free to use them as you like.
 :::
 
 
+## 1.2. Create a project folder
 
-## 1.2. Create a working folder
+- [ ] Create a folder on your computer for the webmap project. Call it `webmap`, or choose another name. Cloud locations work too.
+- [ ] Open your code editor and open that folder using **File → Open Folder…**
 
-- [x] Create a working folder on your computer for your webmap project. You can call it `webmap` or choose another name. Cloud locations work too.
+You will keep all your webmap code and data layers in this project folder.
 
-- [x] Open your code editing software and open the empty webmap folder in there. Usually by **File → Open Folder...** → Navigate to your new folder and open it.
-
-You will use this folder to store the webmap code and geospatial data files displayed on the map.
-
-![*Opening a working folder in VS Code*](images/1-2_open-folder.png)
+![*Opening a working folder in VS Code.*](images/1-2_open-folder.png)
 
 
 
-## 1.3. Set up the OpenLayers application
+## 1.3. Create the OpenLayers application
 
-Follow the [OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.html) to create a basic OpenLayers application and the required file structure in your working folder.
+Follow the [OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.html) to create a basic OpenLayers application.
 
-- [x] Open a terminal in your code editing software, often via **Terminal → New Terminal**. Make sure the terminal is working in your project folder (the terminal path should end with `...\webmap`) before running the commands given in the OpenLayers guide. If everything looks good, run the commands in the exact order.
+- [ ] Open a terminal in your code editing software, often via **Terminal → New Terminal**. 
+- [ ] Check that the terminal is working in your project folder before running commands (the terminal path should end with `...\webmap`) 
+- [ ] Follow the Quick Start instructions in order to run the needed commands. If a command fails, read the terminal message for a possible solution. Make sure that Node.js is installed and that the terminal is running in your project folder.
+
+After successful run of the final command `npm start`, the terminal should display a local development server address, often `http://localhost:5173/`. Open that address in your browser. You should see a world map with OpenStreetMap base. **This development server allows you to test your changes locally while you work.** The map is not yet published online, and you cannot share the URL to anyone to see your webmap outside your local device.
 
 ::: {.callout-tip}
 If you are working with e.g. Notepad++, [this forum](https://community.latenode.com/t/setting-up-npm-packages-while-using-notepad-need-guidance/36503) discusses how to use the `npm` terminal commands.
 :::
 
-
-The setup creates the files and installs the dependencies needed to run OpenLayers application. We will build on this starting point throughout the tutorial.
-
-After you run `npm start`, **you may be prompted with errors** and action suggestions to solve them. Feel free to run those, but often they are not a necessity for the OpenLayers application to run. 
-
-If everything goes well, the terminal will display a **local development server address**, typically `http://localhost:5173/`. Open this address in your browser to view the default webmap - just a world map displayed with OpenStreetMap base. This development server allows you to test your changes locally while you work. The map is not yet published online, and you cannot share the URL to anyone to see your webmap outside your local device.
-
-![*Local development server address and the default OpenLayers map*](images/1-3_local-server.png)
-
+![*Local development server address is launched in browser to view the default OpenLayers map.*](images/1-3_local-server.png)
 
 
 ## 1.4. Explore the project files
 
-Take a moment to explore the files created by the setup.
+You will work with three main files:
 
-- `index.html` defines the basic structure of the web page and provides a container for the map.
-- `main.js` contains the JavaScript code that creates and configures the map.
-- `style.css` controls the appearance and layout of the page and map.
+- `index.html` defines the page structure and contains the map container.
+- `main.js` contains the JavaScript that creates the map and adds layers and controls.
+- `style.css` controls the appearance and layout of the page.
 
 Each of the files above already contain some code, so you won't have to start from scratch.
 
 ::: {.callout-warning}
-**Do not open `index.html` directly from your file system as your main way of testing the map.** Use the local development server instead. Some web resources and JavaScript modules require a server, and direct file access can cause errors. For example, the OpenStreetMap tile service has updated its usage policies to avoid unnecessary requests to its volunteer-run servers, which leads to blocked tiles when opening the `index.html` directly from you file explorer. Read more: [https://wiki.openstreetmap.org/wiki/Blocked_tiles](https://wiki.openstreetmap.org/wiki/Blocked_tiles).
+**Do not open `index.html` directly from your file explorer as your main way of testing the map.** Use the local development server instead. Some web resources and JavaScript modules require a server, and direct file access can cause errors. For example, the OpenStreetMap tile service has updated its usage policies to avoid unnecessary requests to its volunteer-run servers, which leads to blocked tiles when opening the `index.html` directly from you file explorer. Read more: [https://wiki.openstreetmap.org/wiki/Blocked_tiles](https://wiki.openstreetmap.org/wiki/Blocked_tiles).
 :::
-
-
 
 ::: {.callout-note}
 ## Checkpoint
@@ -75,6 +70,7 @@ Before continuing, make sure that:
 - The project folder is open in your code editor.
 - The development server starts without errors.
 - The local webmap opens in your browser and displays a basemap.
+- You can locate `index.html`, `main.js` and `style.css`.
 
 If the map does not appear, check the terminal for error messages before proceeding.
 :::
