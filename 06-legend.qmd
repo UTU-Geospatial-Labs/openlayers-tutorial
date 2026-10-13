@@ -11,7 +11,7 @@ A useful legend should explain the map's symbols without hiding too much of the 
 
 - [ ] Open `index.html`.
 - [ ] Find the map container `<div id="map" class="map">`.
-- [ ] Add the legend markup **inside the map container**, on the next indentation:
+- [ ] Add the legend markup **inside the map container**, on the next indentation. Note that the snippet below contains already existing code for your reference:
 
 ```html
 <body>
@@ -28,14 +28,7 @@ A useful legend should explain the map's symbols without hiding too much of the 
   </body>
 ```
 
-```html
-<!-- Map legend -->
-      <div id="legend">
-        Some stuff for our legend.
-    </div>
-```
-
-- [ ] Save the `index.html` file and preview the changes on your webmap. See the small text in the upper-right corner? That's your legend (for now)!
+- [ ] Save the `index.html` file and preview the changes on your webmap. See the small text on the top of the map? That's your legend (for now)!
 
 
 ## 6.2. Position and style the legend
@@ -68,19 +61,33 @@ A useful legend should explain the map's symbols without hiding too much of the 
   gap: 8px;
   margin: 5px 0;
 }
+
+.legend-swatch {
+  width: 22px;
+  height: 14px;
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border: 1px solid #555;
+}
 ```
 
-- `#legend { }` defines where the legend container is positioned and how the it looks like - a white box with some shadow and other tweaks. `z-index: 10` makes sure the legend is written on top of the map.
+`#legend { }` defines where the legend container is positioned and how the it looks like - a white box with some shadow and other tweaks. `z-index: 10` makes sure the legend is written on top of the map.
 
-- `#legend p { }` on the other hand defines how normal paragraph text inside the legend will be spaced.
+`#legend p { }` on the other hand defines how normal paragraph text inside the legend will be spaced.
 
 `.legend-item { }` defines placement of the coloured boxes that match with our layers' visualisations.
+
+`.legend-swatch { }` configures the actual symbol boxes.
+
+- [ ] Save `style.css` and view the changes. Looks better already!
 
 
 ## 6.3. Add legend symbols and labels
 
 The legend needs a label and a symbol that match each layer on the map. These will be configured with both `index.html` and `style.css` files.
 
+- [ ] Open `index.html`.
 - [ ] Remove the `Stuff for our legend will be here.` placeholder, and make sure the `<div id="legend">` is followed by the code below. Make sure the style categories are once again **inside** the legend item by increasing the indentation one step further.
 
 ```html
@@ -125,6 +132,8 @@ The legend needs a label and a symbol that match each layer on the map. These wi
       </div>
 ```
 - [ ] Save `index.html` and preview your webmap.
+
+![*The legend contains labels for our layers and the forest reserve categories.*](images/6-3_legend-labels.png)
 
 
 Now, populate the legend with **correct symbol styles**. 
@@ -185,7 +194,7 @@ When creating the legend from scratch with this method, you will add the symbol 
 - [ ] Save and view your changes on the webmap. 
 
 
-**[SCREENSHOT 6.3: Show the finished legend on top of the map. Check that symbols are large enough to distinguish and labels are not clipped.]**
+![*Legend lables and symbols match with the layer visualisations on the webmap.*](images/6-3_legend-styles.png)
 
 
 ::: {.callout-note}
@@ -195,7 +204,7 @@ When creating the legend from scratch with this method, you will add the symbol 
 - Each layer has a label and a symbol (except OpenStreetMap, which is not yet visible in the legend).
 - The legend symbols match the styles of the GeoJSON and WMS layers.
 
-If the legend is hidden behind the map, check that it is inside the map container and has a suitable `z-index`.
+If the legend is hidden behind the map, check that it is inside the map container and has a large enough `z-index`.
 :::
 
 [Next: Create a basemap switcher →](07-basemap-switcher.qmd)
