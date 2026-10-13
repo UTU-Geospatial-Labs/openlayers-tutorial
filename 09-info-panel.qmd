@@ -1,1 +1,148 @@
+---
+title: 9 - Info panel
+---
+
+Adding one more UI element - the abstract that tells users about your map
+
+First, the i-button
+
+```css
+/* ----------------------------------------
+    i-button and map information panel (abstract)
+---------------------------------------- */
+.map-info {
+  position: absolute;
+  bottom: 70px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.info-button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background: #eeeeee;
+}
+```
+
+```javascript
+//---------------------------
+// 5. Configure abstract toggle
+//---------------------------
+// Show or hide the map information panel (abstract)
+const infoButton = document.getElementById("info-button");
+const abstractPanel = document.getElementById("abstract-panel");
+
+infoButton.addEventListener("click", () => {
+  const isExpanded =
+    infoButton.getAttribute("aria-expanded") === "true";
+
+  abstractPanel.hidden = isExpanded;
+
+  infoButton.setAttribute(
+    "aria-expanded",
+    String(!isExpanded)
+  );
+
+  infoButton.setAttribute(
+    "aria-label",
+    isExpanded ? "Show map abstract" : "Hide map abstract"
+  );
+});
+```
+
+```html
+ <!-- Abstract toggle via info-button -->
+      <div class="map-info">
+
+        <button
+          id="info-button"
+          class="info-button"
+          type="button"
+          aria-label="Show map abstract"
+          aria-expanded="false"
+          aria-controls="abstract-panel">
+          i
+        </button>
+```
+
+THERE ARE NOW NEW CODE IN ALL OF THE FILES! Good explanations and their relationships is needed.
+
+
+## Then configuring the abstract panel and its content
+
+```html
+<!-- Abstract panel that appears when toggled -->
+        <div id="abstract-panel" class="abstract-panel" hidden>
+          
+          <h2> About this map</h2>
+
+          <p>
+            This webmap visualises the distribution of forest reserves, and national and international conservation areas in Tanzania. 
+            International conservation areas consist of UNESCO World Heritage sites, as well as internationally important wetlands (Ramsar Sites).
+          </p>
+
+          <p>
+            <strong>Data layers:</strong>
+            Protected planet.
+          </p>
+
+          <p>
+            <em>
+              UNEP-WCMC (2026). Protected Area Profile for 
+              United Republic of Tanzania from the World Database 
+              on Protected Areas, September 2026. 
+              Available at:
+            </em>
+
+            <a href="https://www.protectedplanet.net"
+              target="_blank"
+              rel="noopener noreferrer">
+              www.protectedplanet.net
+            </a>
+          </p>
+
+        </div>
+      </div>
+```
+
+
+```css
+.abstract-panel {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.abstract-panel h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.abstract-panel p {
+  margin: 0 0 12px;
+}
+```
 
