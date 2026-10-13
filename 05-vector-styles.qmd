@@ -7,6 +7,7 @@ You will use feature attributes to style different forest-reserve categories wit
 ## 5.1. Style forest reserves by category
 
 The *Tanzania Forest Rerserves 2022* layer contains a `desig` attribute (short for *designation*) that defines four sub-categories of different forest reserves:
+
 - `Forest Reserve`
 - `Forest Plantation`
 - `Nature Forest Reserve`
@@ -34,7 +35,7 @@ const forestStyles = {
       color: '#000000'
     }),
     stroke: new Stroke({
-      color: '#000000'
+      color: '#000000',
       width: 1
     })
   }),
@@ -44,7 +45,7 @@ const forestStyles = {
       color: '#000000'
     }),
     stroke: new Stroke({
-      color:'#000000'
+      color:'#000000',
       width: 1
     })
   }),
@@ -54,7 +55,7 @@ const forestStyles = {
       color: '#000000'
     }),
     stroke: new Stroke({
-      color: '#000000'
+      color: '#000000',
       width: 1
     })
   }),
@@ -64,33 +65,35 @@ const forestStyles = {
       color: '#000000'
     }),
     stroke: new Stroke({
-      color: '#000000'
+      color: '#000000',
       width: 1
     })
   })
 };
 ```
 
-As you can see, each category is displayed separately, and contains parameters for 
+As you can see, each category is displayed separately, and contains parameters for
+
 - `fill` that controls the polygon interior,
 - `stroke` that controls the polygon outline, and
 - `width` that controls the outline thickness. 
 
 At the moment, the fill and outline colors are black for all categories. 
 
-- [ ] Change the colors for each category's **fill AND stroke** based on the HEX color codes below:
+- [ ] Change the colors for each category's **fill AND stroke** based on the HEX color codes below.
+- [ ] After changing the colors, save the `main.js`.
 
-- Forest Reserve: `#006b00`
-- Forest Plantation: `#d3f226`
-- Nature Forest Reserve: `#81bf00`
-- Village Land Forest Reserve: `#56cf68`
+* Forest Reserve: `#006b00`
+* Forest Plantation: `#d3f226`
+* Nature Forest Reserve: `#81bf00`
+* Village Land Forest Reserve: `#56cf68`
 
-- [ ] Save the `main.js`.
+
 
 
 ## 5.2. Apply the style to each feature
 
-Defining the styles does not automatically apply them. We need a function that reads the `desig` attribute from each feature and returns the matching style.
+Defining the styles does not automatically apply them anywhere. We need a function that reads the `desig` attribute from each feature and returns the matching style.
 
 - [ ] Still in `main.js`, add this function immediately after the previous code where you defined `const forestStyles = {}`:
 
@@ -176,7 +179,7 @@ This is not the most handy way to create diagonal line pattern fills for polygon
 - [ ] Save and view the changes on your local development server URL.
 
 
-**[SCREENSHOT 5.2: Show a location where the hatch pattern is visible, ideally including an area where thematic layers overlap.]**
+![*Our webmap starts to look like - well, a webmap!*](images/5-4_visualised-layers.png)
 
 
 ::: {.callout-note}
