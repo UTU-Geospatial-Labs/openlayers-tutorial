@@ -2,17 +2,31 @@
 title: 6 - Legend
 ---
 
-[INTRODUCTION TEXT]
+You will create a map legend that explains the colours and patterns used for the thematic layers. You will build its content in `index.html` and control its appearance in `style.css`.
 
-## 7.1. Create the legend container
+A useful legend should explain the map's symbols without hiding too much of the map. In this chapter, we will place a compact legend in the upper-right corner.
 
-We want our map legend to explain what the symbols and colours on the map represent. We will place a legend in the top-right corner of the map.
 
-The legend consists of two parts: 
-- In `index.html`, we define the HTML elements and the text that users will see. 
-- In `style.css`, we define the position and appearance of the legend and its items.
+## 6.1. Create the legend container
 
-- [ ] First, add the basic legend container to the HTML file.
+- [ ] Open `index.html`.
+- [ ] Find the map container `<div id="map" class="map">`.
+- [ ] Add the legend markup **inside the map container**, on the next indentation:
+
+```html
+<body>
+    <div id="map" class="map">
+
+      <!-- Map legend -->
+      <div id="legend">
+        Stuff for our legend will be here.
+      </div>
+    </div>
+
+    <!-- JavaScript application -->
+    <script type="module" src="main.js"></script>
+  </body>
+```
 
 ```html
 <!-- Map legend -->
@@ -21,9 +35,12 @@ The legend consists of two parts:
     </div>
 ```
 
-Save the `index.html` file and preview the changes on your webmap. See the small text in the upper-right corner? That's your legend (for now)!
+- [ ] Save the `index.html` file and preview the changes on your webmap. See the small text in the upper-right corner? That's your legend (for now)!
 
-- [ ] Next, open your `style.css` file. Add the following code block to the end of the existing code:
+
+## 6.2. Position and style the legend
+
+- [ ] Open `style.css` file and add the following rules at the the end of the existing code:
 
 ```css
 /* ----------------------------------------
@@ -31,11 +48,9 @@ Save the `index.html` file and preview the changes on your webmap. See the small
 ---------------------------------------- */
 #legend {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 10px;
   z-index: 10;
-  margin-top: 10px;
-  margin-right: 10px;
   background: white;
   opacity: 0.95;
   border-radius: 5px;
@@ -55,37 +70,22 @@ Save the `index.html` file and preview the changes on your webmap. See the small
 }
 ```
 
-Here, the `#legend {` defines how the legend container looks like - a white box with some shadow and other tweaks. `z-index: 10` makes sure the legend is written on top of the map.
+- `#legend { }` defines where the legend container is positioned and how the it looks like - a white box with some shadow and other tweaks. `z-index: 10` makes sure the legend is written on top of the map.
 
-`#legend p {` on the other hand defines how the normal paragraph text inside the legend will be spaced.
+- `#legend p { }` on the other hand defines how normal paragraph text inside the legend will be spaced.
 
-`.legend-item {}` defines placement of the coloe boxes that match with our layers' visualisation.
+`.legend-item { }` defines placement of the coloured boxes that match with our layers' visualisations.
 
 
-## 7.2. Add symbols for the map layers
+## 6.3. Add legend symbols and labels
 
-The legend needs a symbol and a label for each category. We will use small coloured boxes for the forest reserve categories and patterned boxes for national parks and international conservation areas.
+The legend needs a label and a symbol that match each layer on the map. These will be configured with both `index.html` and `style.css` files.
 
-In `index.html`, add a legend item for each category. Each item contains a symbol element and a text label. In `style.css`, use classes to define the appearance of the symbols.
+- [ ] Remove the `Stuff for our legend will be here.` placeholder, and make sure the `<div id="legend">` is followed by the code below. Make sure the style categories are once again **inside** the legend item by increasing the indentation one step further.
 
 ```html
 <!-- Map legend -->
       <div id="legend">
-
-        <!-- Basemap selection -->
-        <p><strong>Basemap</strong></p>
-
-        <label class="basemap-option">
-          <input type="radio" name="basemap" value="osm" checked>
-          OpenStreetMap
-        </label>
-
-        <label class="basemap-option">
-          <input type="radio" name="basemap" value="satellite">
-          MapTiler Satellite
-        </label>
-
-        <hr>
 
         <!-- Forest reserve layers -->
         <p><strong>Forest reserves</strong></p>
@@ -122,18 +122,20 @@ In `index.html`, add a legend item for each category. Each item contains a symbo
           <span class="legend-swatch international-area"></span>
           International conservation area
         </div>
-
       </div>
-    </div>
 ```
-Save and preview.
+- [ ] Save `index.html` and preview your webmap.
 
 
-The class names connect the HTML elements to their CSS styles. For example, the `forest-reserve` class applies the colour defined by `.forest-reserve` in the `style.css` stylesheet.
+Now, populate the legend with **correct symbol styles**. 
 
-Make sure the legend colours and patterns match the styles you created in Chapter 5. If you change a layer's style, update its legend symbol as well.
+::: {.callout-note}
+When creating the legend from scratch with this method, you will add the symbol colours and fill patterns **manually**. If you change the layer fill colors, you need to change them in the legend, too. Other approaches, such as using some popular OpenLayers plugins automates this process.
+:::
 
-- [ ] Copy the following CSS code and paste it at the end of your `style.css` file:
+- [ ] Open `style.css`
+- [ ] Copy the following CSS rules and paste them at the end of your `style.css` file:
+
 
 ```css
 /* ----------------------------------------
@@ -179,9 +181,21 @@ Make sure the legend colours and patterns match the styles you created in Chapte
   border: 1px solid #000000;
 }
 ```
+- [ ] Double-check that the HEX colour codes match with the actual layer styles in `main.js`
+- [ ] Save and view your changes on the webmap. 
 
 
-## Checkpoint?
+**[SCREENSHOT 6.3: Show the finished legend on top of the map. Check that symbols are large enough to distinguish and labels are not clipped.]**
 
+
+::: {.callout-note}
+## Checkpoint
+
+- The legend is positioned in the upper-right corner.
+- Each layer has a label and a symbol (except OpenStreetMap, which is not yet visible in the legend).
+- The legend symbols match the styles of the GeoJSON and WMS layers.
+
+If the legend is hidden behind the map, check that it is inside the map container and has a suitable `z-index`.
+:::
 
 [Next: Create a basemap switcher →](07-basemap-switcher.qmd)
