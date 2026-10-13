@@ -13,7 +13,7 @@ WMS delivers rendered map images from a remote geospatial server, such as **GeoS
 
 ## 2.1. Start with an OpenLayers example
 
-- [x] Open official OpenLayers example that we will use as the base for our whole webmap: [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) 
+- [ ] Open official OpenLayers example that we will use as the base for our whole webmap: [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) 
 
 ::: {.callout-note}
 When working with OpenLayers webmap projects, the official OpenLayers repositories are a great resource to develop functionalities for the map. [Examples](https://openlayers.org/en/latest/examples/) and the [Workshop](https://openlayers.org/workshop/en/) are main locations to search for code.
@@ -22,26 +22,26 @@ When working with OpenLayers webmap projects, the official OpenLayers repositori
 The [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) example demonstrates how to display a WMS layer on an OpenLayers map. Its original dataset covers US states, but we will replace that dataset with a layer served by the [Climate Risk Database](https://crd.resilienceacademy.ac.tz/). 
 
 
-- [x] Review the `index.html` and `main.js` files in the example. 
-- [x] Copy the code from these two files, and paste them into your corresponding `index.html` and `main.js` files.
-- [x] Save the files (often `Ctrl/Command + S`) and refresh your localhost development server to see the changes on your webmap. At this stage, your map should be exactly as the [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) example.
+- [ ] Review the `index.html` and `main.js` files in the example. 
+- [ ] Copy the code from these two files, and paste them into your corresponding `index.html` and `main.js` files.
+- [ ] Save the files (often `Ctrl/Command + S`) and refresh your localhost development server to see the changes on your webmap. At this stage, your map should be exactly as the [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) example.
 
-[!Single Image WMS webmap](./images/2-1_WMS-example.png)
+![Single Image WMS webmap](./images/2-1_WMS-example.png)
 
 
 ## 2.2. Find the layer and WMS link
 
 We will use **Tanzania World Heritage and Ramsar Sites 2026** dataset published via Climate Risk Database (CRD).
 
-- [x] Open [Tanzania World Heritage and Ramsar Sites 2026](https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1102) in CRD → Click **Open properties** → **Copy OGC Web Services URL** → Paste the link somewhere for you to edit, such as on a notepad or at the end of your `main.js` file (remember to delete later).
+- [ ] Open [Tanzania World Heritage and Ramsar Sites 2026](https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1102) in CRD → Click **Open properties** → **Copy OGC Web Services URL** → Paste the link somewhere for you to edit, such as on a notepad or at the end of your `main.js` file (remember to delete later).
 
-[!OGC Web Service URL in Climate Risk Database](./images/2-2_CRD-ows.png)
+![OGC Web Service URL in Climate Risk Database](./images/2-2_CRD-ows.png)
 
 
 
 ## 2.3. Replace the example layer
 
-- [x] Open `main.js` and locate the existing WMS layer configuration. We will change the **service URL**, the **layer name** and the **extent** so that the map displays the Tanzanian dataset. 
+- [ ] Open `main.js` and locate the existing WMS layer configuration. We will change the **service URL**, the **layer name** and the **extent** so that the map displays the Tanzanian dataset. 
 
 Once located, examine the original code in `main.js` file where the WMS connection is created:
 
@@ -67,7 +67,7 @@ As you can see, all the required elements to create a WMS connection to this lay
 - `geonode/tanzania_international_conservation_areas_2026/` - the GeoServer **workspace (geonode)** and name of the layer file
 - `ows` - the standard how the layer is served via the web. Climate Risk Database automatically suggests to serve the layer through *any* web service (OWS standard), but for our webmap, we can define that we use the **WMS standard**, meaning that we use the existing visualisation, and in an image format that is light-weight for a webmap to display.
 
-- [x] Edit your `main.js` file to create a connection to the Tanzania World Heritage and Ramsar Sites 2026 layer, instead of the US States layer by replacing the `url` and `params` parameters in the section where a WMS layer is configured. Expand the code block below to see the edits in action.
+- [ ] Edit your `main.js` file to create a connection to the Tanzania World Heritage and Ramsar Sites 2026 layer, instead of the US States layer by replacing the `url` and `params` parameters in the section where a WMS layer is configured. Expand the code block below to see the edits in action.
 
 <details>
 <summary>View the edited `main.js` file</summary>
@@ -91,7 +91,7 @@ new ImageLayer({
 
 In addition to the correct connection parametres, you still need to change the `extent` parameter coordinates to match the extent of the layer. Often, these coordinates can be extracted from GeoServer, or approximated e.g. in Google Maps or QGIS. The coordinates represent the top-left and bottom-right corner of a bounding box that covers the data layer.
 
-- [x] Replace the extent of US States layer to our Tanzanian layer with the correct coordinates: `extent: [3228700, -1381359, 4567834, -162868]`
+- [ ] Replace the extent of US States layer to our Tanzanian layer with the correct coordinates: `extent: [3228700, -1381359, 4567834, -162868]`
 
 ::: {.callout-note}
 The extent must use the same coordinate reference system as the webmap view. Default coordniate system of OpenLayers webmaps is WGS84, and fortunately, our layer is in the same CRS.
