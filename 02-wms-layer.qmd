@@ -3,34 +3,39 @@ title: 2 - Add a WMS layer
 ---
 
 
-In this chapter, you will add a geospatial data layer to your webmap using a Web Map Service (WMS).
+In this chapter, you will add a geospatial data layer to your webmap using Web Map Service (WMS).
 
 WMS delivers rendered map images from a remote geospatial server, such as **GeoServer**. Instead of downloading and displaying the original vector features in your browser, OpenLayers requests map images from the server for the area currently being viewed.
 
-We will start from an existing OpenLayers example and adapt it to display conservation areas in Tanzania.
+We will start from an existing OpenLayers example and adapt it to display World Heritage and Ramsar Sites in Tanzania.
 
 
 
 ## 2.1. Start with an OpenLayers example
 
-Open official OpenLayers example [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) that we will use as the base for our whole webmap.
+Open official OpenLayers example that we will use as the base for our whole webmap: [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) 
 
-This example demonstrates how to display a WMS layer in OpenLayers. Its original dataset covers US states, but we will replace that dataset with a layer served by the [Climate Risk Database](https://crd.resilienceacademy.ac.tz/). 
+> [!NOTE]
+> When working with OpenLayers webmap projects, the official OpenLayers repositories are a great resource to develop functionalities for the map. [Examples](https://openlayers.org/en/latest/examples/) and the [Workshop](https://openlayers.org/workshop/en/) are main locations to search for code.
 
-Review the `index.html` and `main.js` files in the example. Copy the code from these two files, and paste them into your corresponding `index.html` and `main.js` files.
+The [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) example demonstrates how to display a WMS layer on an OpenLayers map. Its original dataset covers US states, but we will replace that dataset with a layer served by the [Climate Risk Database](https://crd.resilienceacademy.ac.tz/). 
+
+
+* Review the `index.html` and `main.js` files in the example. 
+* Copy the code from these two files, and paste them into your corresponding `index.html` and `main.js` files.
 
 Save the files (often Ctrl/Command + S) and refresh your localhost development server to see the changes on your webmap. At this stage, your map should be exactly as the [Single Image WMS](https://openlayers.org/en/latest/examples/wms-image.html) example.
 
-*Screenshot 1: The original Single Image WMS example, showing the US states layer.*
+[!Single Image WMS webmap](images/2-1_WMS-example.png)
 
 
-## 2.2. Find the WMS service and layer
+## 2.2. Find the layer and WMS link
 
 We will use **Tanzania World Heritage and Ramsar Sites 2026** dataset published via Climate Risk Database (CRD).
 
-Open [Tanzania World Heritage and Ramsar Sites 2026](https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1102) in CRD --> Click **Open properties** --> **Copy OGC Web Services URL** --> Paste the link somewhere for you to edit, such as on a notepad or at the end of your `main.js` file (remember to delete later).
+Open [Tanzania World Heritage and Ramsar Sites 2026](https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1102) in CRD → Click **Open properties** → **Copy OGC Web Services URL** → Paste the link somewhere for you to edit, such as on a notepad or at the end of your `main.js` file (remember to delete later).
 
-*Screenshot 2: The dataset or GeoServer page showing the layer name and the OGC service information.*
+[!OGC Web Service URL in Climate Risk Database](images/2-2_CRD-ows.png)
 
 
 
@@ -40,6 +45,7 @@ Open `main.js` and locate the existing WMS layer configuration. We will change t
 
 Once located, examine the original code in `main.js` file where the WMS connection is created:
 
+`main.js`
 ```javascript
 new ImageLayer({
     extent: [-13884991, 2870341, -7455066, 6338219],
@@ -54,48 +60,51 @@ new ImageLayer({
 
 Then, examine the copied OGC Web Service link to our Tanzania-layer:
 
-https://crd.resilienceacademy.ac.tz/geoserver/geonode/tanzania_international_conservation_areas_2026/ows
+`https://crd.resilienceacademy.ac.tz/geoserver/geonode/tanzania_international_conservation_areas_2026/ows`
 
 As you can see, all the required elements to create a WMS connection to this layer can be found from the link - it just needs to be pieced into correct sections:
-* https://crd.resilienceacademy.ac.tz/geoserver/ - the address to the GeoServer where all layers in CRD are stored and published.
-* geonode/tanzania_international_conservation_areas_2026/ - the GeoServer **workspace (geonode)** and name of the layer file
-* ows - the standard how the layer is served via the web. Climate Risk Database automatically suggests to serve the layer through *any* web service (OWS standard), but for our webmap, we can define that we use the WMS standard, meaning that we use the existing visualisation, and in an image format that is light-weight for a webmap to display.
-### Starting point
-
-
-### Edit the code
+- `https://crd.resilienceacademy.ac.tz/geoserver/` - the address to the GeoServer where all layers in CRD are stored and published.
+- `geonode/tanzania_international_conservation_areas_2026/` - the GeoServer **workspace (geonode)** and name of the layer file
+- `ows` - the standard how the layer is served via the web. Climate Risk Database automatically suggests to serve the layer through *any* web service (OWS standard), but for our webmap, we can define that we use the **WMS standard**, meaning that we use the existing visualisation, and in an image format that is light-weight for a webmap to display.
 
 Edit your `main.js` file to create a connection to the Tanzania World Heritage and Ramsar Sites 2026 layer, instead of the US States layer by replacing the `url` and `params` parameters in the section where a WMS layer is configured.
 
-Now, the code should look like this:
+<details>
+<summary>View the edited `main.js` file</summary>
 
-`main.js`
 ```javascript
 new ImageLayer({
     extent: [-13884991, 2870341, -7455066, 6338219],
     source: new ImageWMS({
-      url: 'https://crd.resilienceacademy.ac.tz/geoserver/wms',
-      params: {'LAYERS': 'geonode:tanzania_international_conservation_areas_2026'},
+      url: 'https://crd.resilienceacademy.ac.tz/geoserver/wms', // URL to correct GeoServer and Web Service (WMS)
+      params: {'LAYERS': 'geonode:tanzania_international_conservation_areas_2026'}, // Correct workspace and layer file name
       ratio: 1,
       serverType: 'geoserver',
     }),
   }),
 ```
+</details>
 
-Change the `extent` parameter coordinates to match extent of Tanzania. Often, these coordinates can be extracted from GeoServer, or approximated e.g. in Google Maps or QGIS. The coordinates represent the top-left and bottom-right corner of a bounding box that covers the data layer.
+
+## 2.4. Change extent
+
+In addition to the correct connection parametres, you still need to change the `extent` parameter coordinates to match the extent of the layer. Often, these coordinates can be extracted from GeoServer, or approximated e.g. in Google Maps or QGIS. The coordinates represent the top-left and bottom-right corner of a bounding box that covers the data layer.
 
 `extent: [3228700, -1381359, 4567834, -162868]`
 
-The extent must use the same coordinate reference system as the map view. Default coordniate system of OpenLayers webmaps is WGS84, and fortunately, the layer is in the same CRS.
+> [!NOTE]
+> The extent must use the same coordinate reference system as the webmap view. Default coordniate system of OpenLayers webmaps is WGS84, and fortunately, our layer is in the same CRS.
 
-*Screenshot 3: The map after replacing the WMS source, before adjusting the map view. If the layer is outside the current extent, explain this in the caption.*
 
 Save `main.js` and refresh your local webmap.
 
-At this stage, the map may still be centred on the United States. The US states layer should no longer be displayed, and the Tanzanian layer may be outside the current map view. This is expected. In the next chapter, you will adjust the map's initial centre and zoom level to bring Tanzania into view.
+At this stage, the map is still centred on the United States. However, the US states layer should no longer be displayed, and you can drag the map to Tanzania to see the new layer. This is expected. In the next chapter, you will adjust the map's initial centre and zoom level to bring Tanzania into default view.
 
 
-### Checkpoint
+*Screenshot 3: The map after replacing the WMS source, before adjusting the map view. If the layer is outside the current extent, explain this in the caption.*
+
+::: {.callout-note}
+## Checkpoint
 
 Before continuing, confirm that:
 
@@ -103,9 +112,11 @@ Before continuing, confirm that:
 - The WMS service URL and layer name are correct.
 - The application runs without JavaScript errors.
 
-If the layer does not appear later when you centre the map on Tanzania, check the service URL, layer name, extent and browser developer console.
+If the new layer does not appear when you pan the map on Tanzania, check the service URL, layer name, and extent.
+:::
 
-### Further reading
+
+## Further reading
 
 - [OpenLayers Single Image WMS example](https://openlayers.org/en/latest/examples/wms-image.html)
 - [OpenLayers documentation](https://openlayers.org/doc/)
