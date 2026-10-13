@@ -61,9 +61,9 @@ All the style parameters are free to be modified. Try out different parameters t
 ::: {.callout-note}
 ## Checkpoint
 
-- [ ] The title appears inside the map, not in the browser tab.
-- [ ] The title is readable on both basemaps.
-- [ ] It does not cover important map content or collide with another control.
+- The title appears inside the map, not in the browser tab.
+- The title is readable on both basemaps.
+- It does not cover important map content or collide with another control.
 :::
 
 [Next: Add an information panel →](09-info-panel.qmd)
