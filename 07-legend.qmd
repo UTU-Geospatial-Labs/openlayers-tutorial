@@ -1,1 +1,151 @@
+---
+title: Legend
+---
+
+```css
+/* ----------------------------------------
+    Legend
+---------------------------------------- */
+#legend {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  margin-top: 10px;
+  margin-right: 10px;
+  background: white;
+  opacity: 0.95;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  padding: 5px 10px;
+}
+
+#legend p {
+  margin: 10px 0 5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0;
+}
+```
+
+EXPLANATIONS OF THE CODE BLOCKS HERE!
+
+
+## Add layer styles to legend
+
+```css
+/* ----------------------------------------
+    Legend symbols (match with layer visualisation)
+---------------------------------------- */
+/* Forest reserve categories */
+.forest-reserve {
+  background: #006b00;
+}
+
+.forest-plantation {
+  background: #d3f226;
+}
+
+.nature-reserve {
+  background: #81bf00;
+}
+
+.village-reserve {
+  background: #56cf68;
+}
+/* National parks layer */
+.national-park {
+  background: repeating-linear-gradient(
+    45deg,
+    #000000,
+    #000000 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  border: 1px solid #000000;
+}
+
+/* International conservation areas layer */
+.international-area {
+  background: repeating-linear-gradient(
+    135deg,
+    #000000,
+    #000000 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  border: 1px solid #000000;
+}
+```
+
+EXPLANATIONS! And some tasks? E.g. defining correct colors?
+
+```html
+<!-- Map legend -->
+      <div id="legend">
+
+        <!-- Basemap selection -->
+        <p><strong>Basemap</strong></p>
+
+        <label class="basemap-option">
+          <input type="radio" name="basemap" value="osm" checked>
+          OpenStreetMap
+        </label>
+
+        <label class="basemap-option">
+          <input type="radio" name="basemap" value="satellite">
+          MapTiler Satellite
+        </label>
+
+        <hr>
+
+        <!-- Forest reserve layers -->
+        <p><strong>Forest reserves</strong></p>
+
+        <div class="legend-item">
+          <span class="legend-swatch forest-reserve"></span>
+          Forest reserve
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch forest-plantation"></span>
+          Forest plantation
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch nature-reserve"></span>
+          Nature forest reserve
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch village-reserve"></span>
+          Village land forest reserve
+        </div>
+
+        <p><strong>National parks and conservation areas</strong></p>
+
+        <!-- Conservation area layers -->
+        <div class="legend-item">
+          <span class="legend-swatch national-park"></span>
+          National park
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch international-area"></span>
+          International conservation area
+        </div>
+
+      </div>
+    </div>
+```
+
+THE LEGEND CONFIGURATION IN HTML FILE. THE BASEMAP SWITCHER SHOULD NOT BE HERE YET, BECAUSE THIS CHAPTER COMES BEFORE THAT.
+
+Perhaps the sections could be added to this code in sections, and not all at once?
+
+Also, the whole code is needed so students see where the legend is placed inside this html.
 
