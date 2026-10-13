@@ -2,9 +2,9 @@
 title: 2 - Add a WMS layer
 ---
 
-In this chapter, you will add a remote geospatial data layer to your webmap using **Web Map Service (WMS)**.
+In this chapter, you will add a geospatial data layer to your webmap using **Web Map Service (WMS)**.
 
-WMS delivers rendered map images from a geospatial server, such as **GeoServer**. Instead of downloading and displaying the original vector features in your browser, OpenLayers requests map images from the server based on parameters you define.
+WMS delivers rendered map images from a remote location, such as **GeoServer**. Instead of downloading and displaying the original vector features in your browser, OpenLayers requests map images from the server over the web based on parameters you define.
 
 **We will start from an existing OpenLayers example and adapt it to display protected areas in Tanzania.**
 
@@ -22,7 +22,7 @@ Your map should now be exactly as the [Single Image WMS](https://openlayers.org/
 When working with OpenLayers webmap projects, the official OpenLayers repositories contain great resources to develop different functionalities for the map. [Examples](https://openlayers.org/en/latest/examples/) and the [Workshop](https://openlayers.org/workshop/en/) are useful starting points to search for code.
 :::
 
-![Single Image WMS webmap](./images/2-1_WMS-example.png)
+![*Single Image WMS webmap example.*](./images/2-1_WMS-example.png)
 
 
 
@@ -38,9 +38,10 @@ For this tutorial, we will replace the US states WMS layer with **Tanzania World
 
 
 The service URL contains several pieces of information. For this layer, the relevant parts are:
-- `https://crd.resilienceacademy.ac.tz/geoserver/` — the GeoServer address.
-- `geonode:tanzania_international_conservation_areas_2026` — the workspace and layer name.
-- `/ows` — a general Open Geospatial Consortium web-services endpoint. In our OpenLayers code, we will request the layer using WMS, which brings the layer as an image that is light-weight for a webmap to read and render.
+
+- `https://crd.resilienceacademy.ac.tz/geoserver/`, the GeoServer address.
+- `geonode:tanzania_international_conservation_areas_2026`, the workspace and layer name.
+- `/ows`, a general Open Geospatial Consortium web-services endpoint. In our OpenLayers code, we will request the layer using WMS, which brings the layer as an image that is light-weight for a webmap to read and render.
 
 
 ## 2.3. Replace the example WMS connection
@@ -60,7 +61,7 @@ new ImageLayer({
 }),
 ```
 
-- [ ] Replace the **service URL and Web Service endpoint (use `/wms`)**, the **workspace** and **layer name** to our Tanzanian dataset.
+- [ ] Replace the **service URL and Web Service endpoint** (use `/wms`), the **workspace** and **layer name** to our Tanzanian dataset.
 
 
 
@@ -78,7 +79,7 @@ The extent must use the same coordinate reference system as the webmap view. Def
 The map is still centred on the United States. That is expected: you have changed the layer, but not the initial map view. Pan to Tanzania to check whether the new layer appears. We will centre the map on Tanzania in the next chapter.
 
 
-*Screenshot 3: The map after replacing the WMS source, before adjusting the map view. If the layer is outside the current extent, explain this in the caption.*
+![*After replacing the WMS layer, the US states layer disappears, but the default map view remains the same.*](images/2-4_edited-WMS.png)
 
 
 ### View full edited code:
