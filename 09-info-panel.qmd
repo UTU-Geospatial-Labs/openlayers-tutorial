@@ -173,10 +173,10 @@ This code checks whether the abstract panel is already open. If it is open, the 
 ::: {.callout-note}
 ## Checkpoint
 
-- [ ] The abstract panel is hidden when the map first opens.
-- [ ] The information button opens and closes it.
-- [ ] The panel remains readable on a smaller screen.
-- [ ] The text identifies the map's subject and credits its data source.
+- The abstract panel is hidden when the map first opens.
+- The information button opens and closes it.
+- The panel remains readable on a smaller screen.
+- The text identifies the map's subject and credits its data source.
 :::
 
 [Next: Publish the webmap →](10-publish.qmd)
