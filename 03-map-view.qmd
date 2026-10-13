@@ -9,7 +9,7 @@ Now that your webmap includes the desired WMS layer, you will adjust the map so 
 
 - [ ] Open `main.js` and locate the map configuration, beginning with `const map = new Map({`.
 
-- [ ] Inside this configuration, find the `view` property. The OpenLayers `view` determines the default centre, zoom level and projection of the map.
+- [ ] Inside this configuration, find the `view` property, which determines the default centre, zoom level and projection of the map.
 
 - [ ] Replace the existing centre and zoom values with the values provided below. The `centre` coordinates represent a point approximately at the center of Tanzania, and the slightly increased `zoom` parameter brings the default map view a bit closer than previously.
 
@@ -95,5 +95,6 @@ Your webmap should now:
 - [OpenLayers Quick Start](https://openlayers.org/doc/quickstart.html)
 
 
+[Next: Add GeoJSON layers →](04-geojson-layers.qmd)
 
 
