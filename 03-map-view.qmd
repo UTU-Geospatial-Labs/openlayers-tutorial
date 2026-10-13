@@ -7,7 +7,7 @@ Next, you will set the map's initial center and zoom, make the map fill the brow
 
 ## 3.1. Set the initial map view
 
-- [ ] Open `main.js` and find the map configuration beginning with `const map = new Map({`.
+- [ ] Open `main.js` and find the map configuration beginning with `const map = new Map({ })`.
 - [ ] Inside it, locate the `view` property.
 - [ ] Set the center and zoom as shown below.
 
@@ -28,7 +28,8 @@ The `center` coordinates represent a point approximately in the middle of Tanzan
 Tanzania should now be visible when the page opens, and the WMS layer with a diagonal line pattern drawn on the map.
 
 
-**[SCREENSHOT 3.1: Show the map centred on Tanzania after changing the `center` and `zoom` values.]**
+![*The map now pans automatically to the new center-point.*](images/3-1_center-zoom.png)
+
 
 
 ## 3.2. Adjust the map window
@@ -36,7 +37,7 @@ Tanzania should now be visible when the page opens, and the WMS layer with a dia
 The map's center and zoom control *what area* is shown. CSS controls *how much space* the map occupies on the page.
 
 - [ ] Open `style.css`.
-- [ ] Add the following rule at the end of the (rather empty) file:
+- [ ] Edit the `#map { }`rule parameters to match the following. If there is no such element yet, just copy-paste the whole code block to the file.
 
 ```css
 #map {
@@ -48,9 +49,8 @@ The map's center and zoom control *what area* is shown. CSS controls *how much s
 }
 ```
 
-Save the file and refresh the map. It should fill the available browser window.
+- [ ] Save `style.css` file and refresh the map. No changes at this point? Complete the next steps.
 
-![*Full-screen default view of the map is now centered over Tanzania.*](/images/3-1_map-view-tanzania.png)
 
 
 ## 3.3. Keep the HTML and CSS organised
@@ -98,9 +98,11 @@ The map's appearance was originally defined in `index.html` inside the `<style>`
   </head>
 ```
 
-- [ ] Save `index.html` and refresh the webmap.
+- [ ] Save `index.html` and refresh the webmap. It should now be full-screen.
 
 The browser will now load the map's styling from your `style.css` file. This keeps the HTML responsible for the page structure and the CSS responsible for its appearance.
+
+![*Full-screen default view of the map is now centered over Tanzania.*](/images/3-1_map-view-tanzania.png)
 
 
 ::: {.callout-note}
