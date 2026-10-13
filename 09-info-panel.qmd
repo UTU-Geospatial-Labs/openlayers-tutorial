@@ -2,67 +2,18 @@
 title: 9 - Info panel
 ---
 
-Adding one more UI element - the abstract that tells users about your map
+You will add an information button that opens and closes a short description of the map. This panel can explain the map's purpose, data sources and important limitations.
 
-First, the i-button
+Keep the text concise. A reader should be able to understand the map without needing to open a separate document.
 
-```css
-/* ----------------------------------------
-    i-button and map information panel (abstract)
----------------------------------------- */
-.map-info {
-  position: absolute;
-  bottom: 70px;
-  left: 10px;
-  z-index: 1000;
-}
 
-.info-button {
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 50%;
-  background: white;
-  color: #333;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
+## 9.1. Add the information button and panel
 
-.info-button:hover {
-  background: #eeeeee;
-}
-```
-
-```javascript
-//---------------------------
-// 5. Configure abstract toggle
-//---------------------------
-// Show or hide the map information panel (abstract)
-const infoButton = document.getElementById("info-button");
-const abstractPanel = document.getElementById("abstract-panel");
-
-infoButton.addEventListener("click", () => {
-  const isExpanded =
-    infoButton.getAttribute("aria-expanded") === "true";
-
-  abstractPanel.hidden = isExpanded;
-
-  infoButton.setAttribute(
-    "aria-expanded",
-    String(!isExpanded)
-  );
-
-  infoButton.setAttribute(
-    "aria-label",
-    isExpanded ? "Show map abstract" : "Hide map abstract"
-  );
-});
-```
+- [ ] Open `index.html`. 
+- [ ] Inside the existing map container, add the block below to create an `info-button` and an `abstract-panel` that opens when the button is clicked. **Place this code after the title, on the same indentation level.** Do not remove the legend or other controls.
 
 ```html
- <!-- Abstract toggle via info-button -->
+      <!-- Abstract toggle via info-button -->
       <div class="map-info">
 
         <button
@@ -74,15 +25,8 @@ infoButton.addEventListener("click", () => {
           aria-controls="abstract-panel">
           i
         </button>
-```
 
-THERE ARE NOW NEW CODE IN ALL OF THE FILES! Good explanations and their relationships is needed.
-
-
-## Then configuring the abstract panel and its content
-
-```html
-<!-- Abstract panel that appears when toggled -->
+        <!-- Abstract panel that appears when toggled -->
         <div id="abstract-panel" class="abstract-panel" hidden>
           
           <h2> About this map</h2>
@@ -116,33 +60,93 @@ THERE ARE NOW NEW CODE IN ALL OF THE FILES! Good explanations and their relation
       </div>
 ```
 
+The abstract texts are very concise and simple in this example. For a real case, the description can be more detailed. An important element is the reference to the thematic data layers' provider.
+
+
+
+## 9.2. Style the button and panel
+
+- [ ] Open `style.css`.
+- [ ] Add the following CSS to the end of the file:
 
 ```css
-.abstract-panel {
+/* ----------------------------------------
+    i-button and abstract panel
+---------------------------------------- */
+.map-info {
   position: absolute;
-  bottom: 45px;
-  left: 0;
-  width: 320px;
-  max-width: calc(100vw - 40px);
-  max-height: 60vh;
-  overflow-y: auto;
-  padding: 16px 20px;
-  box-sizing: border-box;
+  bottom: 70px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.info-button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
   background: white;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   color: #333;
-  font-size: 14px;
-  line-height: 1.6;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.abstract-panel h2 {
-  margin: 0 0 10px;
-  font-size: 18px;
-}
-
-.abstract-panel p {
-  margin: 0 0 12px;
+.info-button:hover {
+  background: #eeeeee;
 }
 ```
+The `.map-info` element positions the button and panel. The `hidden` attribute keeps the panel closed initially. In this example, the `info-button` and `map-title` overlap a bit. If you would like them not to, increase the `bottom` parameter of `.map.info { }` element to e.g. `85px`.
 
+- [ ] Save `style.css`.
+
+
+## 9.3. Make the button open and close the panel
+
+Final step is to make the actual functionality of the `info-button` work. When the button is clicked, the abstract should appear.
+
+- [ ] Open `main.js`.
+- [ ] Add the code below at the end of the file, after the section where you configure the basemap toggle functionality:
+
+```javascript
+// Show or hide the map information panel (abstract)
+const infoButton = document.getElementById("info-button");
+const abstractPanel = document.getElementById("abstract-panel");
+
+infoButton.addEventListener("click", () => {
+  const isExpanded =
+    infoButton.getAttribute("aria-expanded") === "true";
+
+  abstractPanel.hidden = isExpanded;
+
+  infoButton.setAttribute(
+    "aria-expanded",
+    String(!isExpanded)
+  );
+
+  infoButton.setAttribute(
+    "aria-label",
+    isExpanded ? "Show map abstract" : "Hide map abstract"
+  );
+});
+```
+
+This code checks whether the abstract panel is already open. If it is open, the click hides it; if it is closed, the click shows it. The `aria-expanded` and `aria-label` attributes help assistive technologies communicate the button's state and purpose.
+
+- [ ] Save `main.js` and refresh the map.
+- [ ] Test the info-button functionality.
+
+
+**[SCREENSHOT 9.1: Show the information panel open with its button, title and legend visible. Use realistic, final text rather than placeholder text.]**
+
+::: {.callout-note}
+## Checkpoint
+
+- [ ] The abstract panel is hidden when the map first opens.
+- [ ] The information button opens and closes it.
+- [ ] The panel remains readable on a smaller screen.
+- [ ] The text identifies the map's subject and credits its data source.
+:::
+
+[Next: Publish the webmap →](10-publish.qmd)
