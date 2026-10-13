@@ -1,1 +1,116 @@
+---
+title: 6 - Basemap switcher
+---
+
+In this chapter, you will add another basemap to your webmap, and create a UI element that allows to switch between the two basemaps [ACTUALOY, THIS MUST COME AFTER THE LEGEND HAS BEEN CREATED AS WE'LL ADD THIS TO THE LEGEND!]
+
+## Add another basemap - MapTiler Satellite
+
+Imports:
+
+```javascript
+import XYZ from 'ol/source/XYZ.js';
+```
+
+const satelliteLayer = new TileLayer({
+    source: new XYZ({
+      url: 'https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=YOUR-API-KEY',
+      attributions: 
+        '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler </a>' +
+        '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors.</a>',
+    }),
+    visible: false,
+});
+
+We'll add this as separate before our current layer list. Configuring this with a unique name *"satelliteLayer"* makes the creation of UI-switcher much easier. 
+
+NOTE! For this you will need your own MapTiler API key. For this, create an account to MapTiler. It is free and provides you with a lot of basemap options to use. [HERE INSTRUCTIONS AND SCREENSHOTS OF THE PROCESS OF FINDING THE API KEY].
+
+MapTiler provides ready-made code snippets for OpenLayers (and Leaflet!) for using their basemaps. The code snippets come with attribution as well, which is handy. 
+
+Change the "YOUR-API-KEY" in the code to match yours. Note that there are options for GeoJSON formats as well, but we'll use here the XYZ format.
+
+## Modify OSM code
+
+Now, create similar code for the OSM layer as well, separate from the layer list:
+
+```javascript
+const osmLayer = new TileLayer({
+    source: new OSM(),
+    visible: true,
+});
+```
+
+These two code blocks should follow the style definitions, and be before the layer list. You can put the OSM first, and then MapTiler Satellite to keep the order logic for the next section.
+
+Now, the OSM and MapTiler are not in the layer list anymore. Let's add them back, but now you can just use their names:
+
+```javascript
+// Define data layers
+const layers = [
+  osmLayer,
+  satelliteLayer,
+
+  new VectorLayer({
+    source: new VectorSource({
+      format: new GeoJSON(),
+      url: './data/tanzania_forest_reserves_2022.json'
+    }),
+    style: forestReserveStyleFunction
+  }),
+```
+
+## Define visibility
+
+[HERE, THE PARAMETER of visible SHOULD NOT BE DEFINED YET IN THE ABOVE CODE BLOCKS, BUT THEY SHOULD BE ADDED NOW!
+
+Set the OSM layer to be default and visible when opening the webmap by adding `visible: true` after the `source`. 
+
+```javascript
+const osmLayer = new TileLayer({
+    source: new OSM(),
+    visible: true,
+});
+```
+
+Similarly, add same parameter for the MapTiler satellite, but set the parameter to `false`
+
+
+## Craft layer switcher
+
+`main.js`
+
+```javascript
+// Toggle visibility between OSM and MapTiler satellite
+document.querySelectorAll('input[name="basemap"]')
+  .forEach((radio) => {
+    radio.addEventListener('change', () => {
+      osmLayer.setVisible(radio.value === 'osm');
+      satelliteLayer.setVisible(radio.value === 'satellite');
+    });
+  });
+```
+
+Adding it to legend (LEGEND MUST BE CREATED AT THIS POINT
+
+```html
+<!-- Map legend -->
+      <div id="legend">
+
+        <!-- Basemap selection -->
+        <p><strong>Basemap</strong></p>
+
+        <label class="basemap-option">
+          <input type="radio" name="basemap" value="osm" checked>
+          OpenStreetMap
+        </label>
+
+        <label class="basemap-option">
+          <input type="radio" name="basemap" value="satellite">
+          MapTiler Satellite
+        </label>
+
+        <hr>
+```
+
 
