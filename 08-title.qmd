@@ -10,12 +10,10 @@ If you remember, the browser-tab title is set in `index.html`'s `<title>` elemen
 ## 8.1. Add the title in HTML
 
 - [ ] Open `index.html`.
-- [ ] Locate the map container `<div id="map class="map">, and add the following code right below it, before the legend. Again, this element must be **inside** the map container, on the same inline level as the legend.
+- [ ] Locate the map container `<div id="map class="map">`, and add the following code right below it, before the legend. Again, this element must be **inside** the map container, on the same inline level as the legend.
 
 ```html
 <body>
-
-    <!-- Map container -->
     <div id="map" class="map">
 
       <!-- Map title -->
@@ -50,13 +48,14 @@ If you remember, the browser-tab title is set in `index.html`'s `<title>` elemen
 }
 ```
 
-All the style parameters are free to be modified. Try out different parameters to style the title - and other elements - so that they are pleasant for your taste.
+All the style parameters are free to be modified. Try out different parameters to style the title - and other elements - so that you are pleased with them.
 
 - [ ] Save `style.css` and view your webmap. The title should now be in the lower-left corner.
 - [ ] Switch between the basemaps and check that the title stays readable.
 - [ ] If the title overlaps another control on a small screen, you can adjust its position or font size.
 
-**[SCREENSHOT 8.1: Show the title on the map with the legend visible too. Ideally show the title over a contrasting map area.]**
+
+![*In this tutorial, the title is placed on the bottom-left corner, but it could be anywhere else as well. Change the position of the UI elements if you like!*](images/8-2_map-title.png)
 
 
 ::: {.callout-note}
