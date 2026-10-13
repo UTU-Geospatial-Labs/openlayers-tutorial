@@ -2,61 +2,69 @@
 title: 5 - Vector styles
 ---
 
-## 5.1. 
+You will use feature attributes to style different forest-reserve categories with different colours, then create a hatch pattern for the national parks and conservation areas layer.
 
-The Tanzania Forest Rerserves 2022 layer contains four different sub-categories of forest reserves. At the moment, these categories are not distinguished, but the layer is visualised with just one single style. Let's create an attribute-based styling to visualise each category with a different color.
+## 5.1. Style forest reserves by category
 
-The forest reserve sub-categories are stored in attribute called `desig`, short for *designation*:
-- Forest Reserve
-- Forest Plantation
-- Nature Forest Reserve
-- Village Land Forest Reserve
+The *Tanzania Forest Rerserves 2022* layer contains a `desig` attribute (short for *designation*) that defines four sub-categories of different forest reserves:
+- `Forest Reserve`
+- `Forest Plantation`
+- `Nature Forest Reserve`
+- `Village Land Forest Reserve`
 
-This rule-based styling is a bit complicated in OpenLayers. Some plugins provide neat ways to do this, but in this tutorial we concentrate on the basics and working without plugins. At the end of this tutorial, we link some handy plugins for you to explore that may easen your work in the future. 
+At the moment, all features in this layer use the same style. We will define a style for each category and then tell OpenLayers which style to use for each feature.
 
-- [ ] Open `main.js` and paste the code block below just after the imports:
+- [ ] Open `main.js`.
+- [ ] Make three more imports:
 
 ```javascript
-main.js
+import Style from 'ol/style/Style.js';
+import Fill from 'ol/style/Fill.js';
+import Stroke from 'ol/style/Stroke.js';
+```
+
+- [ ] Still working in `main.js`, copy the code block below and paste it just after the imports:
+
+```javascript
 
 // Forest reserve styles based on the 'desig' attribute
 const forestStyles = {
   'Forest Reserve': new Style({
     fill: new Fill({
-      color: '#006b00'
+      color: '#000000'
     }),
     stroke: new Stroke({
-      color: '#006b00',
+      color: '#000000'
       width: 1
     })
   }),
 
   'Forest Plantation': new Style({
     fill: new Fill({
-      color: '#d3f226'
+      color: '#000000'
     }),
     stroke: new Stroke({
-      color:'#d3f226',
+      color:'#000000'
       width: 1
     })
   }),
 
   'Nature Forest Reserve': new Style({
     fill: new Fill({
-      color: '#81bf00'
+      color: '#000000'
     }),
     stroke: new Stroke({
-      color: '#81bf00',
+      color: '#000000'
       width: 1
     })
   }),
 
   'Village Land Forest Reserve': new Style({
     fill: new Fill({
-      color: '#56cf68'
+      color: '#000000'
     }),
     stroke: new Stroke({
-      color: '#56cf68',
+      color: '#000000'
       width: 1
     })
   })
@@ -68,36 +76,40 @@ As you can see, each category is displayed separately, and contains parameters f
 - `stroke` that controls the polygon outline, and
 - `width` that controls the outline thickness. 
 
-The fill and outline colors are just black at this point. 
-- [ ] Change them for each category based on the HTML color codes below:
+At the moment, the fill and outline colors are black for all categories. 
 
-- Forest Reserve: #006b00
-- Forest Plantation: #d3f226
-- Nature Forest Reserve: #81bf00
-- Village Land Forest Reserve: #56cf68
+- [ ] Change the colors for each category's **fill AND stroke** based on the HEX color codes below:
 
-Next, we must tell how the visualisations are applied to the layer where these categories are stored in the `desig` attribute. This can be done with a simple function below.
+- Forest Reserve: `#006b00`
+- Forest Plantation: `#d3f226`
+- Nature Forest Reserve: `#81bf00`
+- Village Land Forest Reserve: `#56cf68`
 
-- [ ] Copythe code block below and paste it to your `main.js` file, right after the code that creates the styling:
+- [ ] Save the `main.js`.
 
-```
-main.js
 
+## 5.2. Apply the style to each feature
+
+Defining the styles does not automatically apply them. We need a function that reads the `desig` attribute from each feature and returns the matching style.
+
+- [ ] Still in `main.js`, add this function immediately after the previous code where you defined `const forestStyles = {}`:
+
+```javascript
 function forestReserveStyleFunction(feature) {
   return forestStyles[feature.get('desig')] || null;
-};
+}
 ```
+
 ::: {.callout-note}
-The `null` statement is added to prevent breakage of the whole visualisation. If you have a typo e.g. in one of the forest reserve categories, the visualisation for that category appears as `null`, i.e. transparent on the map, instead of breaking the whole visualisation for the layer.
+`feature.get('desig')` reads the value of the `desig` attribute. The function uses that value to look up the matching style. If no matching category exists, `null` leaves the feature without this style rather than causing the lookup to fail.
 :::
 
 
+## 5.3. Match the style with correct layer
 
-## 5.2. Apply the newly created style for the correct layer
+So far, your new style is defined and exists, but it is not added on any vector layer.
 
-Defining a style does not automatically change the map. We must also assign the style function to the correct vector layer. So far, your new style is defined and exists, but it is not applied on any layer.
-
-- [ ] Scroll down to the layer list where you have defined the GeoJSON layers. Here, you'll need to add one additional parameter that tells the `tanzania_forest_reserves_2022` layer to use the style you just created:
+- [ ] In `main.js`, scroll down to the `layers` array where you have defined the GeoJSON layers. Here, you'll need to add one additional parameter that tells the `tanzania_forest_reserves_2022.json` to use the style you just created:
 
 ```javascript
 main.js
@@ -111,22 +123,18 @@ main.js
   }),
 ```
 
-Save and check how the webmap looks like. Do you distinguish the different forest reserve categories?
+- [ ] Save and check how the webmap looks like. Do you distinguish the different forest reserve categories?
 
 
-## 5.3. Create style for the National parks layer
+## 5.4. Create style for the National parks layer
 
-Colours are useful for distinguishing categories, but patterns can also help differentiate overlapping polygon layers. The *Tanzania World Heritage and Ramsar Sites 2026* layer already uses a diagonal hatch pattern, drawn to your map from its styling in GeoServer. 
+Colours are useful for distinguishing categories, but patterns can also help differentiate overlapping polygon layers. The *Tanzania World Heritage and Ramsar Sites 2026* WMS layer already uses a diagonal hatch pattern, drawn to your map from its styling in GeoServer. 
 
-We will create a similar pattern for *Tanzania National parks and Conservation areas 2023* layer, but using the opposite diagonal direction. When these two layers overlap, there will be a "net" pattern displayed on the map.
+We will create a similar pattern for *Tanzania National parks and Conservation areas 2023*, but using the opposite diagonal direction. When these two layers overlap, there will be a "net" pattern displayed on the map.
 
-Once again, this fill pattern style is a bit complicated to create in OpenLayers.
-
-- [ ] Copy the whole code block below and paste it to your `main.js` file, right after the `function` that defines the forest reserves style:
+- [ ] Copy the function below and paste it to your `main.js` file, right after the `forestReserveStyleFunction`:
 
 ```javascript
-main.js
-
 // Create a diagonal hatch pattern used to symbolize national parks and conservation areas
 function createHatchPattern() {
   const canvas = document.createElement('canvas');
@@ -137,7 +145,7 @@ function createHatchPattern() {
 
   //Draw diagonal hatch line
   context.strokeStyle = '#000000';
-  context.lineWidth = 2;
+  context.lineWidth = 1;
 
   context.beginPath();
   context.moveTo(0, 0);
@@ -147,7 +155,6 @@ function createHatchPattern() {
   return context.createPattern(canvas, 'repeat');
 }
 
-// ...and put that hatch pattern to use
 const nationalParksStyle = new Style({
   fill: new Fill({
     color: createHatchPattern()
@@ -159,8 +166,17 @@ const nationalParksStyle = new Style({
 });
 ```
 
-- [ ] Assign this new style to the `tanzania_national_parks_2023* GeoJSON layer, in the same way as the previous one. 
+The function draws a short diagonal line on a tiny canvas. `createPattern(..., 'repeat')` repeats that canvas to fill the polygon.
 
+::: {.callout-note}
+This is not the most handy way to create diagonal line pattern fills for polygons in OpenLayers, but works well enough for this purpose. For reference, **plugins created by OpenLayers user developers** are a great way to simplify the creation of advanced styles - and streamline the development of many other webmap features, too.
+:::
+
+- [ ] Assign this new style to the `tanzania_national_parks_2023.json` layer in the same way as you did for the `tanzania_forest_reserves_2022.json` layer.
+- [ ] Save and view the changes on your local development server URL.
+
+
+**[SCREENSHOT 5.2: Show a location where the hatch pattern is visible, ideally including an area where thematic layers overlap.]**
 
 
 ::: {.callout-note}
@@ -170,8 +186,9 @@ Before continuing, make sure that:
 
 - Forest reserve categories have different colours.
 - National parks use a hatch pattern.
-- The national parks style is assigned to the correct layer.
 - The map still loads without JavaScript errors.
+
+If all forest reserves have the same colour, or some of the polygons appear transparent, check the spelling and capitalisation of the `desig` categories. Attribute values must match the keys in `forestStyles` exactly.
 :::
 
 
