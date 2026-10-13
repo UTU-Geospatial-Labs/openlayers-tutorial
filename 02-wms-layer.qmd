@@ -48,7 +48,6 @@ The service URL contains several pieces of information. For this layer, the rele
 
 In `main.js`, find the existing `ImageLayer` configuration. It should resemble this:
 
-`main.js`
 ```javascript
 new ImageLayer({
   extent: [-13884991, 2870341, -7455066, 6338219],
