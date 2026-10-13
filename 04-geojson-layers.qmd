@@ -16,19 +16,19 @@ We will use two more datasets from the [Climate Risk Database](https://crd.resil
 - [Tanzania Forest Reserves 2022](https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1108)
 - [Tanzania National Parks and Conservation Areas 2023](https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1105)
 
-- [ ] For each dataset, **Download** → **Export Data** → **GeoJSON** format. Once the export is ready, **save** it. 
+- [ ] For each dataset, **Download** → **Export Data** → **GeoJSON** format. Once the export is ready, **save** it.
 
 ![*Download data from Climate Risk Database*](images/4-1_download-geojson.png)
 
-- [ ] Depending on your browser, the saved export may open in a new tab rather than downloading automatically. If this happens, save the raw data to your computer. This can be done e.g. via a **Save** button, or by right-clicking the raw data window and saving it to your device.
-
-![*Save the exported GeoJSON file, examples with Firefox and Google Chrome*](images/4-1_save-geojson.png)
+Depending on your browser, the saved export may open in a new tab rather than downloading automatically. If this happens, you need to save the raw data file to your computer. This can be done e.g. via a **Save** button, or by right-clicking the raw data window and saving it to your device.
 
 - [ ] Save the two files in the `/data` folder you created, and name them as:
     - `tanzania_forest_reserves_2022.json`
     - `tanzania_national_parks_2023.json`
 
 If you choose different names, you will need to use those same names in the code later.
+
+![*Save the exported GeoJSON file, examples with Firefox and Google Chrome*](images/4-1_save-geojson.png)
 
 Your project folder should now contain a structure similar to this:
 
@@ -74,7 +74,7 @@ import VectorLayer from 'ol/layer/Vector';
 
 We will add a `VectorLayer` for each of the two local datasets. Each vector layer uses a `VectorSource` to load its file and a `GeoJSON` format reader to interpret its contents.
 
-- [ ] Insert the following block into the `layers` array after the WMS layer:
+- [ ] Insert the following block into the `layers` array after the OpenStreetMap layer:
 
 ```javascript
 new VectorLayer({
@@ -91,6 +91,7 @@ The file paths must match your folder structure and filenames. For example, `./d
 
 - [ ] Repeat the process for the other GeoJSON layer - `tanzania_national_parks_2023.json`
 
+### Layer order in the code vs. the webmap
 The order of the layers in the array determines their drawing order. For this exercise, layers should be arranged in the following order:
 
 1. OpenStreetMap basemap is at the bottom - *but first in the list!*
@@ -104,6 +105,8 @@ Expand the code block below to view the full layer list code in the `main.js` fi
 <summary>View the edited `main.js` file</summary>
 
 ```javascript
+main.js
+
 const layers = [
   new TileLayer({
     source: new OSM(),
@@ -161,62 +164,7 @@ If a dataset is missing, check the browser developer console and confirm that:
 - [OpenLayers Basic Concepts](https://openlayers.org/doc/tutorials/concepts.html)
 - [GeoJSON specification](https://geojson.org/)
 
-
-
-
-
-
-Now you will populare your webmap with some more vector layers. For the sake of practicing, you will download two layers to your computer and bring those as local files to the webmap.
-
-### 4.1. Download GeoJSON layers
-
-First, add a folder called "data" in your webmap-working-folder/my-app/data.
-
-Go to Climate Risk Database --> Datasets --> Search for Tanzania Forest reserves 2022 and Tanzania National parks and Conservation areas 2023.
-
-https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1108
-https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1105
-
-
-Open the Tanzania Forest reserves 2023 dataset --> Download --> Export Data --> Format GeoJSON --> A raw .json formatted file should appear as a new tab in your browser (if it did not download automatically). Save the file to the newly created data folder inside your webmap working folder. Rename the “result.json” to tanzania_forest_reserves_2022.json”. Do the same for the tanzania national parks 2023 dataset. 
-
-
-
-Note: Depending on the browser you are using, saving this .json file can work a bit differently. Might be that you can save the raw data file by right-clicking the browser window and Save with name... (or something else that allows you to browse a location for the saved result.json file), or there may be a Save button in the top-panel of your browser. Google will help you if you can not find a way to save the file!
-
-[IMAGE OF THE DATASETS IN THE FOLDER]
-
-### 4.2. Import packages
-
-Now, you'll need some more OpenLayers packages to be installed. This is done easily by importing the packages you need in the beginning of the code in main.js
-
-Import 1) import VectorSource from 'ol/source/Vector'; 2) import GeoJSON from 'ol/format/GeoJSON'; and 3) import VectorLayer from 'ol/layer/Vector';
-
-These do not have to be in any particular order. However, in the final code you'll see we have grouped similar types of imports under one "title" to improve the readability.
-
-### 4.3. Add the vector layers to map
-
-Add these local layers to the webmap by adding them to the layers-list
-const = layers [ xxx ]
-For now, there are only OpenStreetMap and the WMS layer. 
-
-We want the layers to be in the following order:
-- OSM
-- Forest reserves layer
-- National parks layer
-- Our WMS layer
-
-Simply add a code block for both datasets in a similar manner to the correct order, inside the layers list:
-
-
-
-[And here is a new Tile Layer]
-
-Note that the url must point into the correct path where your data layer files are. ./data/[file name] assumes the data-folder is inside the my-app folder. That is why we don't need to define the whole path, but the dot is enough. Also, although the data files are .json extension, OL can read them as GeoJSONs, meaning that it can retreive the coordinate system and coordinate information from the files. Similarly, you can open .json files e.g. in QGIS as such, without changing them to .geojson extension. This change can however be done just by renaming the file in your folder and typing .geojson to replace .json. 
-
-[IMAGE OF SCREENSHOT OF THE CODE AT THIS POINT]
-
-Save. Explore the changes on your webmap!
+[Next: Style vector layers →](05-vector-styles.qmd)
 
 
 [Next: Add a WMS layer →](02-wms-layer.qmd)
