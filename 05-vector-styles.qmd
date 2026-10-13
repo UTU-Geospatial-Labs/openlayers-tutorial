@@ -1,1 +1,136 @@
+---
+title: 5 - Vector styles
+---
 
+## 5.1. 
+
+Now, lets style the GeoJSON layers with something more intuitive. For the Tanzania forest reserves 2022 we will use a categorisesd style, meaning that we'll use different colors for attribute called "desig", that defines a sub-category of the forest reserrves. There are four in the dataset:
+- Forest Reserve
+- Forest Plantation
+- Nature Forest Reserve
+- Village Land Forest Reserve
+
+This rule-based styling is a bit complicated in OpenLayers. Some plugins provide neat ways to do this, but in this tutorial we concentrate on the basics and working without plugins. At the end of this tutorial, we'll link some nice plugins that easen your work in the future. 
+
+The code block for this is rather long, and we have given it here in full. Paste this code right after the imports in your `main.js` file. After this code block, let's take a look at some of the parameters.
+
+```javascript
+// Forest reserve styles based on the 'desig' attribute
+const forestStyles = {
+  'Forest Reserve': new Style({
+    fill: new Fill({
+      color: '#006b00'
+    }),
+    stroke: new Stroke({
+      color: '#006b00',
+      width: 1
+    })
+  }),
+
+  'Forest Plantation': new Style({
+    fill: new Fill({
+      color: '#d3f226'
+    }),
+    stroke: new Stroke({
+      color:'#d3f226',
+      width: 1
+    })
+  }),
+
+  'Nature Forest Reserve': new Style({
+    fill: new Fill({
+      color: '#81bf00'
+    }),
+    stroke: new Stroke({
+      color: '#81bf00',
+      width: 1
+    })
+  }),
+
+  'Village Land Forest Reserve': new Style({
+    fill: new Fill({
+      color: '#56cf68'
+    }),
+    stroke: new Stroke({
+      color: '#56cf68',
+      width: 1
+    })
+  })
+};
+
+// Apply the above style according to the reserve designation
+function forestReserveStyleFunction(feature) {
+  return forestStyles[feature.get('desig')] || null; // 'desig' = name of the attribute that contains the forest categories
+};
+```
+
+[HERE some explanations!] 
+[ALSO, lets change the colors to just black in all of the categories, and then give HTML codes of the desired colors in this tutorial that the students must change to the code].
+
+## 5.2. Apply the newly created style for the correct layer
+
+Scroll down to the layer list where you have defined the GeoJSON layers. Here, we'll need to add one additional parameter that teels the layer to use the style you just created. So far, the code just knows the style, but it is not applied anywhere.
+
+```javascript
+  new VectorLayer({
+    source: new VectorSource({
+      format: new GeoJSON(),
+      url: './data/tanzania_forest_reserves_2022.json'
+    }),
+    style: forestReserveStyleFunction
+  }),
+```
+
+Save and check how the webmap looks like now. If you have typos or problems in the code in any of the categories, those forest reserve polygons will appear as transparent, not visible on the map.
+
+
+## 5.3. Create style for the National parks layer
+
+Our WMS layer has a diagonal line fill pattern in the polygons. This style has been created in GeoServer where the layer has been published in, and is served as such for our webmap, too. We'll use similar style for the National parks layer, but the diagonal lines go to the other direction. This way, when these two layers overlap, there will be a "net" in those areas.
+
+Once again, this style is a bit complicated to create with just code, but it works.
+
+Paste the code below after the Forest reserves style in your `main.js`. 
+
+```javascript
+// Create a diagonal hatch pattern used to symbolize national parks
+function createHatchPattern() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 10;
+  canvas.height = 10;
+
+  const context = canvas.getContext('2d');
+
+  //Draw diagonal hatch line
+  context.strokeStyle = '#000000';
+  context.lineWidth = 2;
+
+  context.beginPath();
+  context.moveTo(0, 0);
+  context.lineTo(10, 10);
+  context.stroke();
+
+  return context.createPattern(canvas, 'repeat');
+}
+
+// ...and put that hatch pattern to use
+const nationalParksStyle = new Style({
+  fill: new Fill({
+    color: createHatchPattern()
+  }),
+  stroke: new Stroke({
+    color: '#000000',
+    width: 1
+  })
+});
+```
+
+Assign this new style to the National Parks GeoJSON layer in the same way as the previous one. 
+
+You can change any parameters of line widths etc. See e.g. what happens if you change `context.moveTo(10, 10);` Remember to save and then view the webmap. Change the parameters back. 
+
+
+
+## Checkpoint?
+
+[Here would be good to paste all of the code?]
