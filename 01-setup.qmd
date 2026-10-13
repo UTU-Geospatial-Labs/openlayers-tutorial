@@ -37,7 +37,13 @@ Follow the [OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.
 
 - [ ] Open a terminal in your code editing software, often via **Terminal → New Terminal**. 
 - [ ] Check that the terminal is working in your project folder before running commands (the terminal path should end with `...\webmap`) 
-- [ ] Follow the Quick Start instructions in order to run the needed commands. If a command fails, read the terminal message for a possible solution. Make sure that Node.js is installed and that the terminal is running in your project folder.
+- [ ] Follow the Quick Start instructions **in the exact order** to run the needed commands. If a command fails, read the terminal message for a possible solution. Make sure that Node.js is installed and that the terminal is running in your project folder.
+
+```bash
+npm create ol-app my-app
+cd my-app
+npm start
+```
 
 After successful run of the final command `npm start`, the terminal should display a local development server address, often `http://localhost:5173/`. Open that address in your browser. You should see a world map with OpenStreetMap base. **This development server allows you to test your changes locally while you work.** The map is not yet published online, and you cannot share the URL to anyone to see your webmap outside your local device.
 
@@ -57,6 +63,9 @@ You will work with three main files:
 - `style.css` controls the appearance and layout of the page.
 
 Each of the files above already contain some code, so you won't have to start from scratch.
+
+![*Your new folder contains all files needed to build an OpenLayers webmap.*](images/1-4_file-structure.png)
+
 
 ::: {.callout-warning}
 **Do not open `index.html` directly from your file explorer as your main way of testing the map.** Use the local development server instead. Some web resources and JavaScript modules require a server, and direct file access can cause errors. For example, the OpenStreetMap tile service has updated its usage policies to avoid unnecessary requests to its volunteer-run servers, which leads to blocked tiles when opening the `index.html` directly from you file explorer. Read more: [https://wiki.openstreetmap.org/wiki/Blocked_tiles](https://wiki.openstreetmap.org/wiki/Blocked_tiles).
