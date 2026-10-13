@@ -92,10 +92,10 @@ OpenLayers draws layers in the order in which they are listed: layers later in t
 4. WMS international conservation areas
 
 
-## View the full list of layers in `main.js` by expanding the code below
+## View full edited list of layers in `main.js`:
 
 <details>
-<summary>View the edited `main.js` file</summary>
+<summary>Expand to view `main.js` code with edits</summary>
 
 ```javascript
 main.js
