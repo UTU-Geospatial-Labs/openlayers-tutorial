@@ -1,1 +1,36 @@
+---
+title: 8 - Title
+---
+
+```html
+<body>
+
+    <!-- Map container -->
+    <div id="map" class="map">
+
+      <!-- Map title -->
+      <h1 class="map-title">
+        Tanzania forest reserves and conservation areas
+      </h1>
+```
+
+```css
+/* ----------------------------------------
+    Map title (bottom-left)
+---------------------------------------- */
+.map-title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1000; /* Z-index keeps UI elements above the map */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 18px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+```
+
 
