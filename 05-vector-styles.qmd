@@ -4,17 +4,21 @@ title: 5 - Vector styles
 
 ## 5.1. 
 
-Now, lets style the GeoJSON layers with something more intuitive. For the Tanzania forest reserves 2022 we will use a categorisesd style, meaning that we'll use different colors for attribute called "desig", that defines a sub-category of the forest reserrves. There are four in the dataset:
+The Tanzania Forest Rerserves 2022 layer contains four different sub-categories of forest reserves. At the moment, these categories are not distinguished, but the layer is visualised with just one single style. Let's create an attribute-based styling to visualise each category with a different color.
+
+The forest reserve sub-categories are stored in attribute called `desig`, short for *designation*:
 - Forest Reserve
 - Forest Plantation
 - Nature Forest Reserve
 - Village Land Forest Reserve
 
-This rule-based styling is a bit complicated in OpenLayers. Some plugins provide neat ways to do this, but in this tutorial we concentrate on the basics and working without plugins. At the end of this tutorial, we'll link some nice plugins that easen your work in the future. 
+This rule-based styling is a bit complicated in OpenLayers. Some plugins provide neat ways to do this, but in this tutorial we concentrate on the basics and working without plugins. At the end of this tutorial, we link some handy plugins for you to explore that may easen your work in the future. 
 
-The code block for this is rather long, and we have given it here in full. Paste this code right after the imports in your `main.js` file. After this code block, let's take a look at some of the parameters.
+- [ ] Open `main.js` and paste the code block below just after the imports:
 
 ```javascript
+main.js
+
 // Forest reserve styles based on the 'desig' attribute
 const forestStyles = {
   'Forest Reserve': new Style({
@@ -57,21 +61,47 @@ const forestStyles = {
     })
   })
 };
-
-// Apply the above style according to the reserve designation
-function forestReserveStyleFunction(feature) {
-  return forestStyles[feature.get('desig')] || null; // 'desig' = name of the attribute that contains the forest categories
-};
 ```
 
-[HERE some explanations!] 
-[ALSO, lets change the colors to just black in all of the categories, and then give HTML codes of the desired colors in this tutorial that the students must change to the code].
+As you can see, each category is displayed separately, and contains parameters for 
+- `fill` that controls the polygon interior,
+- `stroke` that controls the polygon outline, and
+- `width` that controls the outline thickness. 
+
+The fill and outline colors are just black at this point. 
+- [ ] Change them for each category based on the HTML color codes below:
+
+- Forest Reserve: #006b00
+- Forest Plantation: #d3f226
+- Nature Forest Reserve: #81bf00
+- Village Land Forest Reserve: #56cf68
+
+Next, we must tell how the visualisations are applied to the layer where these categories are stored in the `desig` attribute. This can be done with a simple function below.
+
+- [ ] Copythe code block below and paste it to your `main.js` file, right after the code that creates the styling:
+
+```
+main.js
+
+function forestReserveStyleFunction(feature) {
+  return forestStyles[feature.get('desig')] || null;
+};
+```
+::: {.callout-note}
+The `null` statement is added to prevent breakage of the whole visualisation. If you have a typo e.g. in one of the forest reserve categories, the visualisation for that category appears as `null`, i.e. transparent on the map, instead of breaking the whole visualisation for the layer.
+:::
+
+
 
 ## 5.2. Apply the newly created style for the correct layer
 
-Scroll down to the layer list where you have defined the GeoJSON layers. Here, we'll need to add one additional parameter that teels the layer to use the style you just created. So far, the code just knows the style, but it is not applied anywhere.
+Defining a style does not automatically change the map. We must also assign the style function to the correct vector layer. So far, your new style is defined and exists, but it is not applied on any layer.
+
+- [ ] Scroll down to the layer list where you have defined the GeoJSON layers. Here, you'll need to add one additional parameter that tells the `tanzania_forest_reserves_2022` layer to use the style you just created:
 
 ```javascript
+main.js
+
   new VectorLayer({
     source: new VectorSource({
       format: new GeoJSON(),
@@ -81,19 +111,23 @@ Scroll down to the layer list where you have defined the GeoJSON layers. Here, w
   }),
 ```
 
-Save and check how the webmap looks like now. If you have typos or problems in the code in any of the categories, those forest reserve polygons will appear as transparent, not visible on the map.
+Save and check how the webmap looks like. Do you distinguish the different forest reserve categories?
 
 
 ## 5.3. Create style for the National parks layer
 
-Our WMS layer has a diagonal line fill pattern in the polygons. This style has been created in GeoServer where the layer has been published in, and is served as such for our webmap, too. We'll use similar style for the National parks layer, but the diagonal lines go to the other direction. This way, when these two layers overlap, there will be a "net" in those areas.
+Colours are useful for distinguishing categories, but patterns can also help differentiate overlapping polygon layers. The *Tanzania World Heritage and Ramsar Sites 2026* layer already uses a diagonal hatch pattern, drawn to your map from its styling in GeoServer. 
 
-Once again, this style is a bit complicated to create with just code, but it works.
+We will create a similar pattern for *Tanzania National parks and Conservation areas 2023* layer, but using the opposite diagonal direction. When these two layers overlap, there will be a "net" pattern displayed on the map.
 
-Paste the code below after the Forest reserves style in your `main.js`. 
+Once again, this fill pattern style is a bit complicated to create in OpenLayers.
+
+- [ ] Copy the whole code block below and paste it to your `main.js` file, right after the `function` that defines the forest reserves style:
 
 ```javascript
-// Create a diagonal hatch pattern used to symbolize national parks
+main.js
+
+// Create a diagonal hatch pattern used to symbolize national parks and conservation areas
 function createHatchPattern() {
   const canvas = document.createElement('canvas');
   canvas.width = 10;
@@ -125,12 +159,20 @@ const nationalParksStyle = new Style({
 });
 ```
 
-Assign this new style to the National Parks GeoJSON layer in the same way as the previous one. 
-
-You can change any parameters of line widths etc. See e.g. what happens if you change `context.moveTo(10, 10);` Remember to save and then view the webmap. Change the parameters back. 
+- [ ] Assign this new style to the `tanzania_national_parks_2023* GeoJSON layer, in the same way as the previous one. 
 
 
 
-## Checkpoint?
+::: {.callout-note}
+## Checkpoint
 
-[Here would be good to paste all of the code?]
+Before continuing, make sure that:
+
+- Forest reserve categories have different colours.
+- National parks use a hatch pattern.
+- The national parks style is assigned to the correct layer.
+- The map still loads without JavaScript errors.
+:::
+
+
+[Next: Create legend →](06-legend.qmd)
