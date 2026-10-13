@@ -82,11 +82,14 @@ At the moment, the fill and outline colors are black for all categories.
 
 - [ ] Change the colors for each category's **fill AND stroke** based on the HEX color codes below.
 - [ ] After changing the colors, save the `main.js`.
-____
+
+::: {.callout-note}
+### HEX colour codes
 * Forest Reserve: `#006b00`
 * Forest Plantation: `#d3f226`
 * Nature Forest Reserve: `#81bf00`
 * Village Land Forest Reserve: `#56cf68`
+:::
 
 
 
