@@ -1,5 +1,5 @@
 ---
-title: 6 - Basemap switcher
+title: 7 - Basemap switcher
 ---
 
 In this chapter, you will add another basemap to your webmap, and create a UI element that allows to switch between the two basemaps [ACTUALOY, THIS MUST COME AFTER THE LEGEND HAS BEEN CREATED AS WE'LL ADD THIS TO THE LEGEND!]
