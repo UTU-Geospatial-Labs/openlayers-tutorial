@@ -2,96 +2,78 @@
 title: 7 - Basemap switcher
 ---
 
-In this chapter, you will add another basemap to your webmap, and create a UI element that allows to switch between the two basemaps [ACTUALOY, THIS MUST COME AFTER THE LEGEND HAS BEEN CREATED AS WE'LL ADD THIS TO THE LEGEND!]
+You will add a topographic basemap and let users switch between it and OpenStreetMap using radio buttons in the legend.
 
-## Add another basemap - MapTiler Satellite
+The topographic basemap in this exercise uses [OpenTopoMap](https://wiki.openstreetmap.org/wiki/OpenTopoMap), which is free and open basemap from various data providers. Correct attribution is as important for this basemap, as it is for OpenStreetMap. You will code all needed attributions while you add the topographic map to you OpenLayers webmap via XYZ tiles. 
 
-Imports:
+::: {.callout-note}
+OpenTopoMap can be used under CC-BY-SA license, which means you can use the resource in any (reasonable-size) project with proper attributions, and by sharing it in the same format, wihtout modifications.
+:::
+
+## 7.1. Define the two basemap layers
+
+- [ ] Open `main.js`. Add this import after the other imports:
 
 ```javascript
 import XYZ from 'ol/source/XYZ.js';
 ```
 
-const satelliteLayer = new TileLayer({
-    source: new XYZ({
-      url: 'https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=YOUR-API-KEY',
-      attributions: 
-        '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler </a>' +
-        '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors.</a>',
-    }),
-    visible: false,
-});
+- [ ] Find the existing **OpenStreetMap** layer in your `layers` array. 
 
-We'll add this as separate before our current layer list. Configuring this with a unique name *"satelliteLayer"* makes the creation of UI-switcher much easier. 
+Instead of configuring the basemaps inside the `layer` array, we will configure them separately. This allows to define unique references for them, which makes your life much easier when configuring the **Layer Switcher** later. 
 
-NOTE! For this you will need your own MapTiler API key. For this, create an account to MapTiler. It is free and provides you with a lot of basemap options to use. [HERE INSTRUCTIONS AND SCREENSHOTS OF THE PROCESS OF FINDING THE API KEY].
-
-MapTiler provides ready-made code snippets for OpenLayers (and Leaflet!) for using their basemaps. The code snippets come with attribution as well, which is handy. 
-
-Change the "YOUR-API-KEY" in the code to match yours. Note that there are options for GeoJSON formats as well, but we'll use here the XYZ format.
-
-## Modify OSM code
-
-Now, create similar code for the OSM layer as well, separate from the layer list:
+- [ ] Right above the `const layers = [ ]` code, define the `OpenStreetMap` layer:
 
 ```javascript
 const osmLayer = new TileLayer({
-    source: new OSM(),
-    visible: true,
+  source: new OSM(),
+  visible: true,
 });
 ```
 
-These two code blocks should follow the style definitions, and be before the layer list. You can put the OSM first, and then MapTiler Satellite to keep the order logic for the next section.
-
-Now, the OSM and MapTiler are not in the layer list anymore. Let's add them back, but now you can just use their names:
+- [ ] Immediately after it, define the topographic layer:
 
 ```javascript
-// Define data layers
+const topoLayer = new TileLayer({
+  source: new XYZ({
+    url: 'https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    attributions:
+      'Map data: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> | ' +
+      'DEM: <a href="https://viewfinderpanoramas.org/" target="_blank" rel="noopener noreferrer">SRTM</a>, ' +
+      '<a href="https://sonny.4lima.de" target="_blank" rel="noopener noreferrer">Sonny</a> | ' +
+      'Map style: © <a href="https://opentopomap.org" target="_blank" rel="noopener noreferrer">OpenTopoMap</a> ' +
+      '(<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC-BY-SA</a>)',
+    maxZoom: 10,
+  }),
+  visible: false,
+});
+```
+
+The `visible` setting controls which basemap is displayed when the map opens. OpenStreetMap is visible by default; the topographic layer starts hidden.
+
+**[SCREENSHOT 7.2: Show the two named basemap definitions in `main.js`.]**
+
+
+## 7.3. Update the layer list
+
+- [ ] In the `layers` array, **replace the original inline OpenStreetMap layer with the two named layers.** Keep the thematic layers in their existing order. The beginning of the array should now look like this:
+
+```javascript
 const layers = [
   osmLayer,
   satelliteLayer,
 
-  new VectorLayer({
-    source: new VectorSource({
-      format: new GeoJSON(),
-      url: './data/tanzania_forest_reserves_2022.json'
-    }),
-    style: forestReserveStyleFunction
-  }),
+  // Keep the forest-reserve, national-parks and WMS layers here as they were.
+];
 ```
 
-## Define visibility
-
-[HERE, THE PARAMETER of visible SHOULD NOT BE DEFINED YET IN THE ABOVE CODE BLOCKS, BUT THEY SHOULD BE ADDED NOW!
-
-Set the OSM layer to be default and visible when opening the webmap by adding `visible: true` after the `source`. 
-
-```javascript
-const osmLayer = new TileLayer({
-    source: new OSM(),
-    visible: true,
-});
-```
-
-Similarly, add same parameter for the MapTiler satellite, but set the parameter to `false`
+- [ ] Save `main.js`.
 
 
-## Craft layer switcher
+## 7.4. Add radio buttons to the legend
 
-`main.js`
-
-```javascript
-// Toggle visibility between OSM and MapTiler satellite
-document.querySelectorAll('input[name="basemap"]')
-  .forEach((radio) => {
-    radio.addEventListener('change', () => {
-      osmLayer.setVisible(radio.value === 'osm');
-      satelliteLayer.setVisible(radio.value === 'satellite');
-    });
-  });
-```
-
-Adding it to legend (LEGEND MUST BE CREATED AT THIS POINT
+- [ ] Open `index.html`.
+- [ ] Add the following controls to the top of the existing legend, before the thematic legend items (**note** that this code snippet shows some existing legend configuration for reference):
 
 ```html
 <!-- Map legend -->
@@ -106,11 +88,57 @@ Adding it to legend (LEGEND MUST BE CREATED AT THIS POINT
         </label>
 
         <label class="basemap-option">
-          <input type="radio" name="basemap" value="satellite">
-          MapTiler Satellite
+          <input type="radio" name="basemap" value="topo">
+          OpenTopoMap
         </label>
 
         <hr>
+
+        <!-- Forest reserve layers -->
+        <p><strong>Forest reserves</strong></p>
+
+        <div class="legend-item">
+          <span class="legend-swatch forest-reserve"></span>
+          Forest reserve
+        </div>
 ```
 
+- [ ] Save `index.html`.
 
+**[SCREENSHOT 7.3: Show the two radio buttons within the legend.]**
+
+
+## 7.5. Connect the controls to the map
+
+- [ ] Go back to `main.js`.
+- [ ] Add the code below to the very end of the file, after `const map = new Map({ })`:
+
+```javascript
+// Toggle visibility between OSM and OpenTopoMap
+document.querySelectorAll('input[name="basemap"]')
+  .forEach((radio) => {
+    radio.addEventListener('change', () => {
+      osmLayer.setVisible(radio.value === 'osm');
+      topoLayer.setVisible(radio.value === 'topo');
+    });
+  });
+```
+
+When a radio button changes, `setVisible()` shows the selected basemap and hides the other. The thematic layers remain visible because the controls only change the visibility of the two basemap layers.
+
+- [ ] Save `main.js` and check your webmap application that everything works. The basemap switcher with radio buttons should be the first element in the legend.
+
+::: {.callout-note}
+## Checkpoint
+
+- [ ] OpenStreetMap is selected when the map opens.
+- [ ] Selecting **OpenTopoMap** changes the basemap.
+- [ ] Selecting **OpenStreetMap** switches back.
+- [ ] The thematic layers remain visible on both basemaps.
+- [ ] Attributions are visible in the bottom-right corner for both basemaps.
+
+If your webmap appears blank, the issue is most likely in the configuration of the OpenStreetMap or OpenTopoMap layers. 
+:::
+
+
+[Next: Add a map title →](08-title.qmd)
