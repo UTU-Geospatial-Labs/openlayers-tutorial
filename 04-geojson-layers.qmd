@@ -2,9 +2,9 @@
 title: 4 - GeoJSON layers
 ---
 
-So far, your webmap displays a basemap and a WMS layer from a remote server. In this chapter, you will add two local vector datasets, also from Tanzania. Unlike the WMS layer, these datasets will be stored in your project folder and loaded directly by OpenLayers as GeoJSON.
+So far, your webmap displays a basemap and a WMS layer from a remote server. In this chapter, you will add two local vector datasets in GeoJSON format. **By the end of the chapter, your map will contain the OpenStreetMap basemap, a WMS layer and two GeoJSON layers.**
 
-By the end of this chapter, you will have three thematic data layers in your webmap, in addition to the basemap.
+Unlike the WMS layer, which is rendered remotely as an image, these GeoJSON files are stored in your project folder and loaded locally by OpenLayers.
 
 
 ## 4.1. Download the datasets
@@ -16,17 +16,17 @@ We will use two more datasets from the [Climate Risk Database](https://crd.resil
 - [Tanzania Forest Reserves 2022](https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1108)
 - [Tanzania National Parks and Conservation Areas 2023](https://crd.resilienceacademy.ac.tz/catalogue/#/dataset/1105)
 
-- [ ] For each dataset, **Download** → **Export Data** → **GeoJSON** format. Once the export is ready, **save** it.
+For each dataset:
+- [ ] Open the dataset page.
+- [ ] Choose **Download → Export Data → GeoJSON**.
+- [ ] Save the exported file in your project's `data` folder.
+- [ ] Rename the files exactly as follows:
+  - `tanzania_forest_reserves_2022.json`
+  - `tanzania_national_parks_2023.json`
 
-![*Download data from Climate Risk Database*](images/4-1_download-geojson.png)
+![*Download data from Climate Risk Database.*](images/4-1_download-geojson.png)
 
-Depending on your browser, the saved export may open in a new tab rather than downloading automatically. If this happens, you need to save the raw data file to your computer. This can be done e.g. via a **Save** button, or by right-clicking the raw data window and saving it to your device.
-
-- [ ] Save the two files in the `/data` folder you created, and name them as:
-    - `tanzania_forest_reserves_2022.json`
-    - `tanzania_national_parks_2023.json`
-
-If you choose different names, you will need to use those same names in the code later.
+If your browser opens the exported data as text in a new tab, use the browser's save option or right-click the page and save the raw file.
 
 ![*Save the exported GeoJSON file, examples with Firefox and Google Chrome*](images/4-1_save-geojson.png)
 
@@ -37,44 +37,32 @@ Your project folder should now contain a structure similar to this:
 ::: {.callout-note}
 ## Checkpoint
 
-Make sure both files are saved in the correct folder. Open each file in your editor and check that it contains geographic data rather than an HTML error page or a download message.
+Make sure both files are saved in the correct folder. Open each file in your editor (or in QGIS!) and check that it contains geographic data rather than an HTML error page or just a download message.
 :::
 
 ## 4.2. Import the required OpenLayers modules
 
-Next, we will tell OpenLayers how to read and display the local GeoJSON datasets.
-
-- [ ] Open `main.js`. At the top of the file, you will find the existing `import` statements. These load the OpenLayers modules that the application needs.
-
-We need three additional modules:
-
-- `VectorSource`, which loads and manages the vector data.
-- `GeoJSON`, which reads the GeoJSON format.
-- `VectorLayer`, which displays the vector features on the map.
-
-Add the bottom three imports alongside the existing imports:
+- [ ] Open `main.js`. At the top of the file, add the three imports below alongside your existing imports:
 
 ```javascript
-import Map from 'ol/Map.js';
-import View from 'ol/View.js';
-import ImageLayer from 'ol/layer/Image.js';
-import TileLayer from 'ol/layer/Tile.js';
-import ImageWMS from 'ol/source/ImageWMS.js';
-import OSM from 'ol/source/OSM.js';
-
-import VectorSource from 'ol/source/Vector';
-import GeoJSON from 'ol/format/GeoJSON';
-import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector.js';
+import GeoJSON from 'ol/format/GeoJSON.js';
+import VectorLayer from 'ol/layer/Vector.js';
 ```
+
+These modules have separate roles:
+
+- `GeoJSON` reads data in GeoJSON format.
+- `VectorSource` loads and stores the vector features.
+- `VectorLayer` displays those features on the map.
+
+Do not delete your existing imports for the basemap or WMS layer.
 
 
 ## 4.3. Add the GeoJSON layers to the map
 
-- [ ] Find the `layers` array in `main.js`. Currently, it only contains the basemap and the WMS layer that was added in [Chapter 2 - Add a WMS layer](https://utu-geospatial-labs.github.io/openlayers-tutorial/02-wms-layer.html).
-
-We will add a `VectorLayer` for each of the two local datasets. Each vector layer uses a `VectorSource` to load its file and a `GeoJSON` format reader to interpret its contents.
-
-- [ ] Insert the following block into the `layers` array after the OpenStreetMap layer:
+- [ ] Find the `layers` array in `main.js`. Currently, it only contains the basemap and the WMS layer that was added in [Chapter 2](https://utu-geospatial-labs.github.io/openlayers-tutorial/02-wms-layer.html).
+- [ ] Add the following layer after the OpenStreetMap and before the WMS layer: 
 
 ```javascript
 new VectorLayer({
@@ -84,22 +72,24 @@ new VectorLayer({
     })
   }),
 ```
+- [ ] Repeat the process for the other GeoJSON layer in your `data` folder - `tanzania_national_parks_2023.json`
+- [ ] Save `main.js` and view the changes.
 
 ::: {.callout-note}
-The file paths must match your folder structure and filenames. For example, `./data/example.json` refers to a file called `example.json` inside the `data` folder. If you used different folder or layer file names, use those instead.
+The file paths must match your folder structure and filenames. For example, `./data/example.json` refers to a file called `example.json` inside `data` folder. `./` can be used as a shortcut to tell that the `data` folder is in the same parent folder as the the `main.js` file. If you used different folder or layer file names, use those instead.
 :::
 
-- [ ] Repeat the process for the other GeoJSON layer - `tanzania_national_parks_2023.json`
-
 ### Layer order in the code vs. the webmap
-The order of the layers in the array determines their drawing order. For this exercise, layers should be arranged in the following order:
 
-1. OpenStreetMap basemap is at the bottom - *but first in the list!*
-2. Forest reserves are displayed above the basemap.
-3. National parks are displayed above the forest reserves.
-4. The WMS layer is at the top. - *and last in the list*
+OpenLayers draws layers in the order in which they are listed: layers later in the array are drawn over layers earlier in the array. For this exercise, use this order:
 
-Expand the code block below to view the full layer list code in the `main.js` file with all four layers.
+1. OpenStreetMap basemap
+2. Forest reserves GeoJSON
+3. National parks and conservation areas GeoJSON
+4. WMS international conservation areas
+
+
+**Expand the code block below to view the full layer list in the `main.js` file with all four layers.**
 
 <details>
 <summary>View the edited `main.js` file</summary>
@@ -142,14 +132,14 @@ const layers = [
 
 </details>
 
-Save `main.js` and refresh the map.
+
 
 ::: {.callout-note}
 ## Checkpoint
 
-Your map should now contain the basemap, the WMS layer and both local GeoJSON layers. Depending on the current styles and layer overlap, the local data may not yet be easy to distinguish. In the next chapter, you will improve the appearance of the vector layers.
+Your map should now contain the basemap, the WMS layer and both local GeoJSON layers. The vector layers may not yet be easy to distinguish because we have not styled them.
 
-If a dataset is missing, check the browser developer console and confirm that:
+If a layer is missing, check:
 
 - The file exists in the `data` folder.
 - The filename and path in the code match the actual file.
@@ -159,12 +149,5 @@ If a dataset is missing, check the browser developer console and confirm that:
 *Insert screenshot 2: The webmap showing the two GeoJSON datasets loaded, with enough detail to distinguish them.*
 :::
 
-### Further reading
-
-- [OpenLayers Basic Concepts](https://openlayers.org/doc/tutorials/concepts.html)
-- [GeoJSON specification](https://geojson.org/)
 
 [Next: Style vector layers →](05-vector-styles.qmd)
-
-
-[Next: Add a WMS layer →](02-wms-layer.qmd)
