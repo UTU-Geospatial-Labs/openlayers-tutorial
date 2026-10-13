@@ -4,7 +4,7 @@ title: 7 - Basemap switcher
 
 You will add a topographic basemap and let users switch between it and OpenStreetMap using radio buttons in the legend.
 
-The topographic basemap in this exercise uses [OpenTopoMap](https://wiki.openstreetmap.org/wiki/OpenTopoMap), which is free and open basemap from various data providers. Correct attribution is as important for this basemap, as it is for OpenStreetMap. You will code all needed attributions while you add the topographic map to you OpenLayers webmap via XYZ tiles. 
+The topographic basemap used in this exercise is the [OpenTopoMap](https://wiki.openstreetmap.org/wiki/OpenTopoMap), which is free and open basemap, created in collaboration by various data providers. Correct attribution is as important for this basemap, as it is for OpenStreetMap. You will code all needed attributions while you add the topographic map to your webmap via XYZ tiles. 
 
 ::: {.callout-note}
 OpenTopoMap can be used under CC-BY-SA license, which means you can use the resource in any (reasonable-size) project with proper attributions, and by sharing it in the same format, wihtout modifications.
@@ -12,7 +12,7 @@ OpenTopoMap can be used under CC-BY-SA license, which means you can use the reso
 
 ## 7.1. Define the two basemap layers
 
-- [ ] Open `main.js`. Add this import after the other imports:
+- [ ] Open `main.js`. Add one more import after the other imports:
 
 ```javascript
 import XYZ from 'ol/source/XYZ.js';
@@ -51,7 +51,7 @@ const topoLayer = new TileLayer({
 
 The `visible` setting controls which basemap is displayed when the map opens. OpenStreetMap is visible by default; the topographic layer starts hidden.
 
-**[SCREENSHOT 7.2: Show the two named basemap definitions in `main.js`.]**
+![*The OSM layer is now defined twice. We'll fix this in the next section.*](images/7-1_basemaps-defined.png)
 
 
 ## 7.3. Update the layer list
@@ -61,7 +61,7 @@ The `visible` setting controls which basemap is displayed when the map opens. Op
 ```javascript
 const layers = [
   osmLayer,
-  satelliteLayer,
+  topoLayer,
 
   // Keep the forest-reserve, national-parks and WMS layers here as they were.
 ];
@@ -73,7 +73,7 @@ const layers = [
 ## 7.4. Add radio buttons to the legend
 
 - [ ] Open `index.html`.
-- [ ] Add the following controls to the top of the existing legend, before the thematic legend items (**note** that this code snippet shows some existing legend configuration for reference):
+- [ ] Add the following controls to the top of the existing legend, before the thematic legend items (**note** that this code snippet shows some existing legend configuration for your reference):
 
 ```html
 <!-- Map legend -->
@@ -105,7 +105,7 @@ const layers = [
 
 - [ ] Save `index.html`.
 
-**[SCREENSHOT 7.3: Show the two radio buttons within the legend.]**
+![*Ta-da, the legend now contains option to change between OpenStreetMap and OpenTopoMap basemaps. The switch does not work yet, though.*](images/7-4_legend-radiobuttons.png)
 
 
 ## 7.5. Connect the controls to the map
@@ -126,7 +126,7 @@ document.querySelectorAll('input[name="basemap"]')
 
 When a radio button changes, `setVisible()` shows the selected basemap and hides the other. The thematic layers remain visible because the controls only change the visibility of the two basemap layers.
 
-- [ ] Save `main.js` and check your webmap application that everything works. The basemap switcher with radio buttons should be the first element in the legend.
+- [ ] Save `main.js` and check your webmap application that everything works.
 
 ::: {.callout-note}
 ## Checkpoint
