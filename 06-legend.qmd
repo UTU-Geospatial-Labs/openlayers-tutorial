@@ -1,5 +1,5 @@
 ---
-title: Legend
+title: 6 - Legend
 ---
 
 ```css
