@@ -21,8 +21,9 @@ For each dataset:
 - [ ] Choose **Download → Export Data → GeoJSON**.
 - [ ] Save the exported file in your project's `data` folder.
 - [ ] Rename the files exactly as follows:
-  - `tanzania_forest_reserves_2022.json`
-  - `tanzania_national_parks_2023.json`
+
+- `tanzania_forest_reserves_2022.json`
+- `tanzania_national_parks_2023.json`
 
 ![*Download data from Climate Risk Database.*](images/4-1_download-geojson.png)
 
@@ -32,7 +33,7 @@ If your browser opens the exported data as text in a new tab, use the browser's 
 
 Your project folder should now contain a structure similar to this:
 
-*Insert screenshot 1: VS Code Explorer showing `index.html`, `main.js`, `style.css` and the two GeoJSON files inside the `data` folder.*
+![*New data-folder should be inside the my-app folder, and the GeoJSON layers should be named correctly.*](images/4-1_folder-structure.png)
 
 ::: {.callout-note}
 ## Checkpoint
@@ -61,7 +62,7 @@ Do not delete your existing imports for the basemap or WMS layer.
 
 ## 4.3. Add the GeoJSON layers to the map
 
-- [ ] Find the `layers` array in `main.js`. Currently, it only contains the basemap and the WMS layer that was added in [Chapter 2](https://utu-geospatial-labs.github.io/openlayers-tutorial/02-wms-layer.html).
+- [ ] Find the `layers` array (list of layers) in `main.js`, starting with `const layers = [ ]`. Currently, it only contains the basemap and the WMS layer that was added in [Chapter 2](https://utu-geospatial-labs.github.io/openlayers-tutorial/02-wms-layer.html).
 - [ ] Add the following layer after the OpenStreetMap and before the WMS layer: 
 
 ```javascript
@@ -75,11 +76,13 @@ new VectorLayer({
 - [ ] Repeat the process for the other GeoJSON layer in your `data` folder - `tanzania_national_parks_2023.json`
 - [ ] Save `main.js` and view the changes.
 
+![*The GeoJSON layers get a default style once loaded to OpenLayers webmap*](images/4-3_GeoJSONs-on-map.png)
+
 ::: {.callout-note}
 The file paths must match your folder structure and filenames. For example, `./data/example.json` refers to a file called `example.json` inside `data` folder. `./` can be used as a shortcut to tell that the `data` folder is in the same parent folder as the the `main.js` file. If you used different folder or layer file names, use those instead.
 :::
 
-### Layer order in the code vs. the webmap
+## Layer order in the code vs. the webmap
 
 OpenLayers draws layers in the order in which they are listed: layers later in the array are drawn over layers earlier in the array. For this exercise, use this order:
 
@@ -89,7 +92,7 @@ OpenLayers draws layers in the order in which they are listed: layers later in t
 4. WMS international conservation areas
 
 
-**Expand the code block below to view the full layer list in the `main.js` file with all four layers.**
+## View the full list of layers in `main.js` by expanding the code below
 
 <details>
 <summary>View the edited `main.js` file</summary>
@@ -146,7 +149,6 @@ If a layer is missing, check:
 - The file contains valid GeoJSON.
 - The required OpenLayers imports are present.
 
-*Insert screenshot 2: The webmap showing the two GeoJSON datasets loaded, with enough detail to distinguish them.*
 :::
 
 
