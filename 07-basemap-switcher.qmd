@@ -131,11 +131,11 @@ When a radio button changes, `setVisible()` shows the selected basemap and hides
 ::: {.callout-note}
 ## Checkpoint
 
-- [ ] OpenStreetMap is selected when the map opens.
-- [ ] Selecting **OpenTopoMap** changes the basemap.
-- [ ] Selecting **OpenStreetMap** switches back.
-- [ ] The thematic layers remain visible on both basemaps.
-- [ ] Attributions are visible in the bottom-right corner for both basemaps.
+- OpenStreetMap is selected when the map opens.
+- Selecting **OpenTopoMap** changes the basemap.
+- Selecting **OpenStreetMap** switches back.
+- The thematic layers remain visible on both basemaps.
+- Attributions are visible in the bottom-right corner for both basemaps.
 
 If your webmap appears blank, the issue is most likely in the configuration of the OpenStreetMap or OpenTopoMap layers. 
 :::
