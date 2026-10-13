@@ -12,8 +12,9 @@ You will need the following software:
 
 Install the latest version of Node.js from [the official Node.js website](https://nodejs.org/en). Install Git from [the Git website](https://git-scm.com/install).
 
-> [!NOTE]
-> This tutorial uses **Visual Studio Code** as the code editing software, but other code editors provide the all the functionalities you need to complete this practical. However, screenshots in this tutorial therefore show VS Code interface, and the layout may differ if you use another editor. No extensions are used in this tutorial, but if you like to use any, feel free to use them as you like.
+::: {.callout-note}
+This tutorial uses **Visual Studio Code** as the code editing software, but other code editors provide the all the functionalities you need to complete this practical. However, screenshots in this tutorial therefore show VS Code interface, and the layout may differ if you use another editor. No extensions are used in this tutorial, but if you like to use any, feel free to use them as you like.
+:::
 
 
 
@@ -35,14 +36,16 @@ Follow the [OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.
 
 * Open a terminal in your code editing software, often via **Terminal → New Terminal**. Make sure the terminal is working in your project folder (the terminal path should end with `...\webmap`) before running the commands given in the [OpenLayers Quick Start guide](https://openlayers.org/doc/quickstart.html). If everything looks good, run the commands in the exact order.
 
-> [!TIP]
-> If you are working with e.g. Notepad++, [this forum](https://community.latenode.com/t/setting-up-npm-packages-while-using-notepad-need-guidance/36503) discusses how to use the `npm` terminal commands.
+::: {.callout-tip}
+If you are working with e.g. Notepad++, [this forum](https://community.latenode.com/t/setting-up-npm-packages-while-using-notepad-need-guidance/36503) discusses how to use the `npm` terminal commands.
+:::
 
 
 The setup creates the files and installs the dependencies needed to run OpenLayers application. We will build on this starting point throughout the tutorial.
 
-> [!WARNING]
-> After you run `npm start`, you may be prompted with errors and action suggestions to solve them. Feel free to run those, but often they are not a necessity for the OpenLayers application to run. 
+::: {.callout-warning}
+After you run `npm start`, you may be prompted with errors and action suggestions to solve them. Feel free to run those, but often they are not a necessity for the OpenLayers application to run. 
+:::
 
 
 If everything goes well, the terminal will display a local development server address, typically `http://localhost:5173/`. Open this address in your browser to view the default webmap. The development server allows you to test your changes locally while you work. The map is not yet published online, and you cannot share the URL to anyone to see your webmap outside your local device.
@@ -63,8 +66,9 @@ Take a moment to explore the files created by the setup.
 
 Each of the files above already contain some code, so you won't have to start from scratch. Once you open the local development server URL in your browser (or code editing software), you should see a basic OpenStreetMap basemap.
 
-> [!WARNING]
-> **Do not open `index.html` directly from your file system as your main way of testing the map.** Use the local development server instead. Some web resources and JavaScript modules require a server, and direct file access can cause errors. For example, the OpenStreetMap tile service has updated its usage policies to avoid unnecessary requests to its volunteer-run servers. Read more: [https://wiki.openstreetmap.org/wiki/Blocked_tiles](https://wiki.openstreetmap.org/wiki/Blocked_tiles).
+::: {.callout-warning}
+**Do not open `index.html` directly from your file system as your main way of testing the map.** Use the local development server instead. Some web resources and JavaScript modules require a server, and direct file access can cause errors. For example, the OpenStreetMap tile service has updated its usage policies to avoid unnecessary requests to its volunteer-run servers. Read more: [https://wiki.openstreetmap.org/wiki/Blocked_tiles](https://wiki.openstreetmap.org/wiki/Blocked_tiles).
+:::
 
 
 *Screenshot 3: The initial webmap displayed in a browser, with the local address visible.*
