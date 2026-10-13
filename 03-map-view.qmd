@@ -2,14 +2,14 @@
 title: 3 - Map view
 ---
 
-Next, you will set the map's initial centre and zoom, make the map fill the browser window, and move the page styling into `style.css`.
+Next, you will set the map's initial center and zoom, make the map fill the browser window, and move the page styling into `style.css`.
 
 
 ## 3.1. Set the initial map view
 
 - [ ] Open `main.js` and find the map configuration beginning with `const map = new Map({`.
 - [ ] Inside it, locate the `view` property.
-- [ ] Set the centre and zoom as shown below.
+- [ ] Set the center and zoom as shown below.
 
 ```javascript
 const map = new Map({
@@ -21,7 +21,7 @@ const map = new Map({
   }),
 });
 ```
-The `center` coordinates represent a point approximately at the center of Tanzania, and the slightly increased `zoom` parameter brings the default map view a bit closer than previously.
+The `center` coordinates represent a point approximately in the middle of Tanzania, and the slightly increased `zoom` parameter brings the default map view a bit closer than previously.
 
 - [ ] Save `main.js` and refresh the webmap.
 
@@ -33,10 +33,10 @@ Tanzania should now be visible when the page opens, and the WMS layer with a dia
 
 ## 3.2. Adjust the map window
 
-The map's centre and zoom control *what area* is shown. CSS controls *how much space* the map occupies on the page.
+The map's center and zoom control *what area* is shown. CSS controls *how much space* the map occupies on the page.
 
 - [ ] Open `style.css`.
-- [ ] Add the following rule at the end of the file:
+- [ ] Add the following rule at the end of the (rather empty) file:
 
 ```css
 #map {
@@ -50,16 +50,15 @@ The map's centre and zoom control *what area* is shown. CSS controls *how much s
 
 Save the file and refresh the map. It should fill the available browser window.
 
-![*Full-screen default view of the map is now centered over Tanzania*](/images/3-1_map-view-tanzania.png)
+![*Full-screen default view of the map is now centered over Tanzania.*](/images/3-1_map-view-tanzania.png)
 
 
 ## 3.3. Keep the HTML and CSS organised
 
-The map's appearance has already been defined in `index.html` inside the `<style>` element. This works, but as the webmap becomes more complex, it is easier to manage all appearances in `style.css` to prevent the HTML-file expanding too much. Let's fix this.
+The map's appearance was originally defined in `index.html` inside the `<style>` element. This works, but as the webmap becomes more complex, it is easier to manage all appearances in `style.css`.
 
 - [ ] Open `index.html`, and examine the `<style>` section. The map window **width and height are now useless** as we already defined the window appearance in `style.css`.
 
-`index.html`
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -82,11 +81,11 @@ The map's appearance has already been defined in `index.html` inside the `<style
 </html>
 ```
 
-- [ ] Remove the whole existing `<style>` section. 
+- [ ] Remove the existing `<style>` section. 
 - [ ] Replace the `"stylesheet"` link from `"node_modules/ol/ol.css"` to `"style.css"`.
-- [ ] Set the `<title>` to a more descriptive name, such as *Tanzania forest reserves and conservation areas*. This text appears in the browser tab. It is different from a title that we will later place visibly on the map.
+- [ ] Once at it, set the `<title>` to a more descriptive name, such as *Tanzania forest reserves and conservation areas*. This text appears in the browser tab. It is different from a title that we will later place visibly on the map.
 
-`index.html`
+**Snippet of `index.html` with edited code inside `<head>` section:**
 ```html
 !DOCTYPE html>
 <html lang="en">
