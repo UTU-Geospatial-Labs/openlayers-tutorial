@@ -22,8 +22,8 @@ For each dataset:
 - [ ] Save the exported file in your project's `data` folder.
 - [ ] Rename the files exactly as follows:
 
-- `tanzania_forest_reserves_2022.json`
-- `tanzania_national_parks_2023.json`
+`tanzania_forest_reserves_2022.json`
+`tanzania_national_parks_2023.json`
 
 ![*Download data from Climate Risk Database.*](images/4-1_download-geojson.png)
 
