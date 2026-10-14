@@ -6,7 +6,7 @@ Here you can find the **full source-code of the resulted OpenLayers webmap app**
 
 Use these for your own reference when debugging your own code.
 
-:::{callout-note}
+:::{.callout-note}
 Some of the code blocks may be in different order than how they were given during the tutorial instructions. This is to harmonise the source code to meaningful entities, and to comment them in a structured way. The order of the source code is important in `main.js`, but for e.g. legend elements in `index.html`, or style rules in `style.css`, a specific order is not crucial.
 :::
 
