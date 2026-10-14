@@ -1,0 +1,499 @@
+--- 
+title: Full source-code
+---
+
+Here you can find the **full source-code of the resulted OpenLayers webmap app**, in `index.html`, `main.js`, `style.css` and `vite.config.js`, i.e. those files that are edited during this tutorial.
+
+Use these for your own reference when debugging your own code.
+
+:::{callout-note}
+Some of the code blocks may be in different order than how they were given during the tutorial instructions. This is to harmonise the source code to meaningful entities, and to comment them in a structured way. The order of the source code is important in `main.js`, but for e.g. legend elements in `index.html`, or style rules in `style.css`, a specific order is not crucial.
+:::
+
+
+### Full `main.js` code:
+```javascript
+import Map from 'ol/Map.js';
+import View from 'ol/View.js';
+import ImageLayer from 'ol/layer/Image.js';
+import TileLayer from 'ol/layer/Tile.js';
+import ImageWMS from 'ol/source/ImageWMS.js';
+import OSM from 'ol/source/OSM.js';
+import VectorSource from 'ol/source/Vector.js';
+import GeoJSON from 'ol/format/GeoJSON.js';
+import VectorLayer from 'ol/layer/Vector.js';
+import Style from 'ol/style/Style.js';
+import Fill from 'ol/style/Fill.js';
+import Stroke from 'ol/style/Stroke.js';
+import XYZ from 'ol/source/XYZ.js';
+
+
+// Forest reserve styles based on the 'desig' attribute
+const forestStyles = {
+  'Forest Reserve': new Style({
+    fill: new Fill({
+      color: '#006b00'
+    }),
+    stroke: new Stroke({
+      color: '#006b00',
+      width: 1
+    })
+  }),
+
+  'Forest Plantation': new Style({
+    fill: new Fill({
+      color: '#d3f226'
+    }),
+    stroke: new Stroke({
+      color:'#d3f226',
+      width: 1
+    })
+  }),
+
+  'Nature Forest Reserve': new Style({
+    fill: new Fill({
+      color: '#81bf00'
+    }),
+    stroke: new Stroke({
+      color: '#81bf00',
+      width: 1
+    })
+  }),
+
+  'Village Land Forest Reserve': new Style({
+    fill: new Fill({
+      color: '#56cf68'
+    }),
+    stroke: new Stroke({
+      color: '#56cf68',
+      width: 1
+    })
+  })
+};
+
+function forestReserveStyleFunction(feature) {
+  return forestStyles[feature.get('desig')] || null;
+}
+
+// Diagonal hatch pattern used to symbolize national parks and conservation areas
+function createHatchPattern() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 10;
+  canvas.height = 10;
+
+  const context = canvas.getContext('2d');
+
+  context.strokeStyle = '#000000';
+  context.lineWidth = 1;
+
+  context.beginPath();
+  context.moveTo(0, 0);
+  context.lineTo(10, 10);
+  context.stroke();
+
+  return context.createPattern(canvas, 'repeat');
+}
+
+const nationalParksStyle = new Style({
+  fill: new Fill({
+    color: createHatchPattern()
+  }),
+  stroke: new Stroke({
+    color: '#000000',
+    width: 1
+  })
+});
+
+// Define basemap layers
+const osmLayer = new TileLayer({
+  source: new OSM(),
+  visible: true,
+});
+
+const topoLayer = new TileLayer({
+  source: new XYZ({
+    url: 'https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    attributions:
+      'Map data: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> | ' +
+      'DEM: <a href="https://viewfinderpanoramas.org/" target="_blank" rel="noopener noreferrer">SRTM</a>, ' +
+      '<a href="https://sonny.4lima.de" target="_blank" rel="noopener noreferrer">Sonny</a> | ' +
+      'Map style: © <a href="https://opentopomap.org" target="_blank" rel="noopener noreferrer">OpenTopoMap</a> ' +
+      '(<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC-BY-SA</a>)',
+    maxZoom: 10,
+  }),
+  visible: false,
+});
+
+// Define layers array
+const layers = [
+  osmLayer,
+  topoLayer,
+
+  new VectorLayer({
+    source: new VectorSource({
+      format: new GeoJSON(),
+      url: './data/tanzania_forest_reserves_2022.json'
+    }),
+    style: forestReserveStyleFunction
+  }),
+  new VectorLayer({
+    source: new VectorSource({
+      format: new GeoJSON(),
+      url: './data/tanzania_national_parks_2023.json'
+    }),
+    style: nationalParksStyle
+  }),
+  new ImageLayer({
+    extent: [3228700, -1381359, 4567834, -162868], // Changed extent coordinates
+    source: new ImageWMS({
+      url: 'https://crd.resilienceacademy.ac.tz/geoserver/wms', // URL to correct GeoServer and Web Service (WMS)
+      params: {'LAYERS': 'geonode:tanzania_international_conservation_areas_2026'}, // Correct workspace and layer file name
+      ratio: 1,
+      serverType: 'geoserver',
+    }),
+  }),
+];
+
+// Configure map view
+const map = new Map({
+  layers: layers,
+  target: 'map',
+  view: new View({
+    center: [3862074, -732904],
+    zoom: 6,
+  }),
+});
+
+// Toggle visibility between OSM and OpenTopoMap
+document.querySelectorAll('input[name="basemap"]')
+  .forEach((radio) => {
+    radio.addEventListener('change', () => {
+      osmLayer.setVisible(radio.value === 'osm');
+      topoLayer.setVisible(radio.value === 'topo');
+    });
+  });
+
+  // Show or hide the map information panel (abstract)
+const infoButton = document.getElementById("info-button");
+const abstractPanel = document.getElementById("abstract-panel");
+
+infoButton.addEventListener("click", () => {
+  const isExpanded =
+    infoButton.getAttribute("aria-expanded") === "true";
+
+  abstractPanel.hidden = isExpanded;
+
+  infoButton.setAttribute(
+    "aria-expanded",
+    String(!isExpanded)
+  );
+
+  infoButton.setAttribute(
+    "aria-label",
+    isExpanded ? "Show map abstract" : "Hide map abstract"
+  );
+});
+```
+
+### Full `index.html` code:
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <meta charset="UTF-8">
+    <title>Tanzania forest reserves and conservation areas</title>
+
+    <!-- This is custom stylesheet that refers to our style.css file -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="map" class="map">
+
+      <!-- Map title -->
+      <h1 class="map-title">
+        Tanzania forest reserves and conservation areas
+      </h1>
+
+            <!-- Abstract toggle via info-button -->
+      <div class="map-info">
+
+        <button
+          id="info-button"
+          class="info-button"
+          type="button"
+          aria-label="Show map abstract"
+          aria-expanded="false"
+          aria-controls="abstract-panel">
+          i
+        </button>
+
+        <!-- Abstract panel that appears when toggled -->
+        <div id="abstract-panel" class="abstract-panel" hidden>
+          
+          <h2> About this map</h2>
+
+          <p>
+            This webmap visualises the distribution of forest reserves, and national and international conservation areas in Tanzania. 
+            International conservation areas consist of UNESCO World Heritage sites, as well as internationally important wetlands (Ramsar Sites).
+          </p>
+
+          <p>
+            <strong>Data layers:</strong>
+            Protected planet.
+          </p>
+
+          <p>
+            <em>
+              UNEP-WCMC (2026). Protected Area Profile for 
+              United Republic of Tanzania from the World Database 
+              on Protected Areas, September 2026. 
+              Available at:
+            </em>
+
+            <a href="https://www.protectedplanet.net"
+              target="_blank"
+              rel="noopener noreferrer">
+              www.protectedplanet.net
+            </a>
+          </p>
+
+        </div>
+      </div>
+
+      <!-- Map legend -->
+      <div id="legend">
+
+        <!-- Basemap selection -->
+        <p><strong>Basemap</strong></p>
+
+        <label class="basemap-option">
+          <input type="radio" name="basemap" value="osm" checked>
+          OpenStreetMap
+        </label>
+
+        <label class="basemap-option">
+          <input type="radio" name="basemap" value="topo">
+          OpenTopoMap
+        </label>
+
+        <hr>
+
+        <!-- Forest reserve layers -->
+        <p><strong>Forest reserves</strong></p>
+
+        <div class="legend-item">
+          <span class="legend-swatch forest-reserve"></span>
+          Forest reserve
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch forest-plantation"></span>
+          Forest plantation
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch nature-reserve"></span>
+          Nature forest reserve
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch village-reserve"></span>
+          Village land forest reserve
+        </div>
+
+        <p><strong>National parks and conservation areas</strong></p>
+
+        <!-- Conservation area layers -->
+        <div class="legend-item">
+          <span class="legend-swatch national-park"></span>
+          National park
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-swatch international-area"></span>
+          International conservation area
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript application -->
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
+```
+
+
+### Full `style.css` code:
+```css
+@import "node_modules/ol/ol.css";
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* ----------------------------------------
+    Legend
+---------------------------------------- */
+#legend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background: white;
+  opacity: 0.95;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  padding: 5px 10px;
+}
+
+#legend p {
+  margin: 10px 0 5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0;
+}
+
+.legend-swatch {
+  width: 22px;
+  height: 14px;
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border: 1px solid #555;
+}
+
+/* ----------------------------------------
+    Legend symbols (match with layer visualisation)
+---------------------------------------- */
+/* Forest reserve categories */
+.forest-reserve {
+  background: #006b00;
+}
+
+.forest-plantation {
+  background: #d3f226;
+}
+
+.nature-reserve {
+  background: #81bf00;
+}
+
+.village-reserve {
+  background: #56cf68;
+}
+/* National parks layer */
+.national-park {
+  background: repeating-linear-gradient(
+    45deg,
+    #000000,
+    #000000 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  border: 1px solid #000000;
+}
+
+/* International conservation areas layer */
+.international-area {
+  background: repeating-linear-gradient(
+    135deg,
+    #000000,
+    #000000 1px,
+    transparent 1px,
+    transparent 7px
+  );
+  border: 1px solid #000000;
+}
+
+/* ----------------------------------------
+    Map title
+---------------------------------------- */
+.map-title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 18px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ----------------------------------------
+    i-button and abstract panel
+---------------------------------------- */
+.map-info {
+  position: absolute;
+  bottom: 70px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.info-button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background: #eeeeee;
+}
+
+.abstract-panel {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.abstract-panel h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.abstract-panel p {
+  margin: 0 0 12px;
+}
+```
+
+### Full `vite.config.js` code:
+```javascript
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  base: './',
+});
+```
