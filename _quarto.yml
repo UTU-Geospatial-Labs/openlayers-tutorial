@@ -4,6 +4,7 @@ project:
 website:
   title: "OpenLayers Webmap Tutorial"
   description: "A practical tutorial for creating, configuring and publishing interactive webmaps with OpenLayers."
+  favicon: ./images/favicon.png
 
   navbar:
     logo: ./images/utu-logo.jpg
