@@ -41,6 +41,7 @@ website:
           - 08-title.qmd
           - 09-info-panel.qmd
           - 10-publish.qmd
+          - full-source-code.qmd
           - tips-and-tools.qmd
 
   page-footer:
