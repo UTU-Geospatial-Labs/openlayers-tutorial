@@ -40,7 +40,6 @@ website:
           - 08-title.qmd
           - 09-info-panel.qmd
           - 10-publish.qmd
-          - references.qmd
 
   page-footer:
     left: |
