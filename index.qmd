@@ -97,5 +97,30 @@ Start with [Chapter 1: Setup](01-setup.qmd) to prepare your working environment.
 
 This tutorial is a practical learning resource used in Master's level Geography teaching at the University of Turku. It is maintained by UTU Geospatial Labs.
 
+## License
+
+Although these materials have been created for learning purposes at the University of Turku, we hope they are helpful for others, too. Thus, we share all the chapter materials openly, and our source codes are openly available in the [GitHub repository of this tutorial](https://github.com/UTU-Geospatial-Labs/openlayers-tutorial). 
+
+### Tutorial instructions
+All the instructional material is made available under the [**Creative Commons Attribution-ShareAlike 4.0 International licence**](https://creativecommons.org/licenses/by-sa/4.0/legalcode). 
+
+**In short, you are free to:**
+
+- **Share** - copy and redistribute the material in any medium or format
+- **Adapt** - remix, transform, and build upon the material
+
+for any purpose, even commercially. The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+**Under the following terms:**
+
+- **Attribution** - You must give appropriate-credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- ***ShareAlike** - If you remix, transform, or build upon the material, you must distribute your contributions under the same-license as the original.
+
+No additional restrictions — You may not apply legal terms or technological-measures that legally restrict others from doing anything the license permits.
+
+
+### OpenLayers code, dataset, and other third-party resources
+The OpenLayers source code and datasets used in the resulted example webmap are licensed with their original terms. If you copy or share this whole instructional material, make sure to follow the terms and licenses of the third-party resource providers when appropriate.
+
 - [Visit the tutorial repository on GitHub](https://github.com/UTU-Geospatial-Labs/openlayers-tutorial)
 - [Learn more about OpenLayers](https://openlayers.org/)
