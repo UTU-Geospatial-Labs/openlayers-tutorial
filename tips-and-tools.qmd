@@ -56,7 +56,7 @@ npm start
 
 This is the recommended method for this project because it understands the project's JavaScript modules and dependencies.
 
-### Try Live Server for simpler webmap projects
+### Try Live Server for other webmap projects
 
 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) is a popular VS Code extension that starts a local server for web projects. It can be handy for simple HTML, CSS and JavaScript projects, including many Leaflet webmaps that do not use a build tool.
 
@@ -64,27 +64,12 @@ However, Live Server is **not a universal replacement** for `npm start`. If your
 
 ## 4. Keep your project files organised
 
-A clear folder structure makes it easier to find files and prevents broken paths. For example, your project might contain:
-
-```text
-webmap/
-├── index.html
-├── package.json
-├── package-lock.json
-├── src/
-│   ├── main.js
-│   └── style.css
-├── public/
-│   └── data/
-│       └── example.geojson
-└── node_modules/
-```
-
-Your exact structure may differ. Follow the structure already used in your project rather than moving files around just to match this example.
+A clear folder structure makes it easier to find files and prevents broken paths. 
 
 A few useful habits:
 
-- Give files and folders descriptive names, and use the same spelling and capitalisation in your code as in the filenames.
+- Use common folder names, such as `data`, `docs`, `main` and `assets` that are familiar for development projects. Selecting the exact folder names may differ per project, but these are examples of almost universally recognised in the developer community. 
+- Use the same spelling and capitalisation in your code as in the filenames.
 - Keep data files in a clearly named folder, such as `data`.
 - Use relative paths carefully. For example, `./data/example.geojson` means that the browser looks for a `data` folder relative to the location from which that path is resolved.
 - Keep a copy of the original data and make a backup before major changes.
@@ -118,7 +103,7 @@ You can browse extensions in VS Code by opening the **Extensions** view and sear
 
 OpenLayers already includes many mapping functions, but additional JavaScript libraries can provide ready-made controls or other features. These are often developed by third parties, rather than being part of the core OpenLayers library.
 
-Before using one, check its documentation, installation instructions, licence, maintenance status and compatibility with your OpenLayers version. Many libraries need to be installed through npm and imported into your JavaScript code; adding a script tag or copying a snippet is not always sufficient.
+Before using one, check its documentation, installation instructions, licence, maintenance status and compatibility with your OpenLayers version. Many libraries need to be installed through `npm` and imported into your JavaScript code; adding a script tag or copying a snippet is not always sufficient.
 
 Here are a few examples to explore:
 
@@ -160,3 +145,6 @@ You do not need to memorise every OpenLayers function. A useful skill is learnin
 - Search the [official examples](https://openlayers.org/en/latest/examples/) for a feature similar to the one you want.
 - Read the documentation for any third-party library before installing it.
 - Experiment on a copy of your project so you can return to a working version if something goes wrong.
+
+
+## Happy mapping!
