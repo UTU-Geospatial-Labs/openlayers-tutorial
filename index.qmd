@@ -93,11 +93,17 @@ You will need a code editor, Node.js and a basic understanding of working with f
 
 Start with [Chapter 1: Setup](01-setup.qmd) to prepare your working environment.
 
-## About this resource
+## Report issues
 
-This tutorial is a practical learning resource used in Master's level Geography teaching at the University of Turku. It is maintained by UTU Geospatial Labs.
+**For UTU MAAN7771 course participants in 2026 only:**
+If you encounter issues with this learning material, please report them to course teachers on the MAAN7771 Moodle site's *General discussion forum*. We will address any technical issues, broken links or screenshots, oudated versions, etc. as soon as possible. 
+
+These instructions are a new learning material, which means that needs for adjusting details emerge when the materials are used the first time. Suggestions for expanding or adjusting the content are also welcome.
+
 
 ## License
+
+This tutorial is a practical learning resource used in Master's level Geography teaching at the University of Turku. It is maintained by UTU Geospatial Labs.
 
 Although these materials have been created for learning purposes at the University of Turku, we hope they are helpful for others, too. Thus, we share all the chapter materials openly, and our source codes are openly available in the [GitHub repository of this tutorial](https://github.com/UTU-Geospatial-Labs/openlayers-tutorial). 
 
@@ -114,7 +120,7 @@ for any purpose, even commercially. The licensor cannot revoke these freedoms as
 **Under the following terms:**
 
 - **Attribution** - You must give appropriate-credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-- ***ShareAlike** - If you remix, transform, or build upon the material, you must distribute your contributions under the same-license as the original.
+- **ShareAlike** - If you remix, transform, or build upon the material, you must distribute your contributions under the same-license as the original.
 
 No additional restrictions — You may not apply legal terms or technological-measures that legally restrict others from doing anything the license permits.
 
