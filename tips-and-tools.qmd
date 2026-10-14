@@ -1,0 +1,162 @@
+---
+title: Tips and useful tools
+---
+
+This chapter collects a few practical tips for working with your webmap code and finding additional tools. You do not need to install every extension or library mentioned here. Start with the tools that solve a problem you actually have, and check that any extra library is compatible with your OpenLayers version.
+
+## 1. Save your work often
+
+Remember to save your changes regularly. In most code editors, the keyboard shortcut is:
+
+- **Windows/Linux:** `Ctrl + S`
+- **macOS:** `Cmd + S`
+
+A small dot or other indicator next to a filename may mean that the file has unsaved changes. Save before refreshing your browser or closing the editor.
+
+## 2. Coming back to coding
+
+You can close Visual Studio Code when you have saved your work. When you want to continue:
+
+1. Open Visual Studio Code.
+2. Open your project's **`webmap` folder** (or the folder containing your webmap project).
+3. Open the integrated terminal in VS Code: **Terminal → New Terminal**.
+4. In the terminal, move to the folder containing `package.json`, if you are not already there.
+5. Start the development server using the command configured for your project.
+
+For the OpenLayers project in this tutorial, the command is:
+
+```bash
+npm start
+```
+
+If your terminal is in the parent folder and the project folder is called `my-app`, first run:
+
+```bash
+cd my-app
+npm start
+```
+
+If you have already opened `my-app` as the project folder, you do **not** need to run `cd my-app` again. The important thing is to run `npm start` from the folder containing the project's `package.json` file.
+
+Keep the terminal running while you work. Open the local address shown in the terminal in your browser. When you edit and save your source files, the development server will usually update the page automatically; if not, refresh the browser.
+
+**First time setting up a project?** If its dependencies have not yet been installed, run `npm install` in the project folder first. You normally do not need to repeat this every time you return to the project.
+
+## 3. Previewing your webmap locally
+
+A local development server lets you preview your webmap in a browser while you work. The best method depends on how the project is built.
+
+### Use `npm start` for this OpenLayers project
+
+This tutorial's OpenLayers project uses npm and a development server (Vite). Start it from the folder containing `package.json`:
+
+```bash
+npm start
+```
+
+This is the recommended method for this project because it understands the project's JavaScript modules and dependencies.
+
+### Try Live Server for simpler webmap projects
+
+[Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) is a popular VS Code extension that starts a local server for web projects. It can be handy for simple HTML, CSS and JavaScript projects, including many Leaflet webmaps that do not use a build tool.
+
+However, Live Server is **not a universal replacement** for `npm start`. If your code imports packages from `node_modules` or relies on a tool such as Vite to bundle or serve modules, use the development server configured for that project. Simply opening an HTML file directly in the browser can also cause problems with JavaScript modules or data-file requests.
+
+## 4. Keep your project files organised
+
+A clear folder structure makes it easier to find files and prevents broken paths. For example, your project might contain:
+
+```text
+webmap/
+├── index.html
+├── package.json
+├── package-lock.json
+├── src/
+│   ├── main.js
+│   └── style.css
+├── public/
+│   └── data/
+│       └── example.geojson
+└── node_modules/
+```
+
+Your exact structure may differ. Follow the structure already used in your project rather than moving files around just to match this example.
+
+A few useful habits:
+
+- Give files and folders descriptive names, and use the same spelling and capitalisation in your code as in the filenames.
+- Keep data files in a clearly named folder, such as `data`.
+- Use relative paths carefully. For example, `./data/example.geojson` means that the browser looks for a `data` folder relative to the location from which that path is resolved.
+- Keep a copy of the original data and make a backup before major changes.
+- Do not manually edit files inside `node_modules`. These files belong to installed packages.
+- Do not delete `package.json` or `package-lock.json`: they describe the project's dependencies and setup.
+- When sharing or publishing the project, make sure that required data files and other assets are included in the published output.
+
+## 5. Useful VS Code extensions
+
+VS Code extensions add features to the editor. Some help you write code, some format it, and others support particular languages or workflows. You do not need all of them.
+
+| Extension | What it does | When it may help |
+|---|---|---|
+| [Prettier – Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) | Formats supported files such as JavaScript, CSS, HTML, JSON and Markdown to make the layout more consistent. | When code indentation or spacing becomes messy. |
+| [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) | Starts a local server for suitable static web projects. | For simple projects that do not need a separate npm development server. |
+| [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) | Identifies many JavaScript code-quality issues and potential mistakes. | When a project is configured to use ESLint. It may need project-specific setup. |
+| [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) | Adds support for writing, running and debugging Python, including environment management and code assistance. | For Python scripts, for example in geospatial data processing. |
+| [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) | Supports interactive Jupyter notebooks with code cells, outputs, tables and plots. | For exploratory analysis and teaching workflows using notebooks. |
+
+### Why do some files look colourful?
+
+VS Code uses **syntax highlighting** to display different kinds of code in different colours. For example, it may colour JavaScript keywords, strings, comments, HTML tags and CSS properties differently. This helps you recognise the structure of a file; it does not necessarily mean that the code is correct.
+
+Language support and extensions can add more advanced features, such as autocomplete, warnings, code navigation and formatting. Python and Jupyter extensions mainly support Python and notebook workflows; they are not required to run an OpenLayers webmap.
+
+A **formatter** such as Prettier changes the layout of code (for example, indentation and line breaks) to make it more consistent. A **linter** such as ESLint checks code for certain potential problems. These tools do different jobs, and neither guarantees that a webmap will work.
+
+You can browse extensions in VS Code by opening the **Extensions** view and searching for a name. Install extensions from publishers you trust, and check their descriptions and requirements. See the [official VS Code extension guide](https://code.visualstudio.com/docs/configure/extensions/extension-marketplace).
+
+## 6. OpenLayers libraries and plugins
+
+OpenLayers already includes many mapping functions, but additional JavaScript libraries can provide ready-made controls or other features. These are often developed by third parties, rather than being part of the core OpenLayers library.
+
+Before using one, check its documentation, installation instructions, licence, maintenance status and compatibility with your OpenLayers version. Many libraries need to be installed through npm and imported into your JavaScript code; adding a script tag or copying a snippet is not always sufficient.
+
+Here are a few examples to explore:
+
+### Layer switcher
+
+[**ol-layerswitcher**](https://github.com/walkermatt/ol-layerswitcher) adds a control for switching map layers on and off. It can be useful when a map contains several thematic layers and you want users to choose which ones to display.
+
+### Popups and overlays
+
+OpenLayers has a built-in [`Overlay`](https://openlayers.org/en/latest/apidoc/module-ol_Overlay-Overlay.html) class that can be used to position HTML content on a map. The official [popup example](https://openlayers.org/en/latest/examples/popup.html) demonstrates one approach. You may not need an extra library for a basic popup.
+
+### More examples and third-party libraries
+
+- [Official OpenLayers examples](https://openlayers.org/en/latest/examples/) — examples of popups, layer controls, styling, drawing, projections and many other features. You can inspect the code to learn how each example works.
+- [OpenLayers third-party libraries](https://openlayers.org/3rd-party/) — a list of libraries that extend OpenLayers or integrate with it.
+- [OpenLayers API documentation](https://openlayers.org/en/latest/apidoc/) — reference documentation for the classes, methods and options available in OpenLayers.
+
+**Tip:** Before installing a plugin, first check the official examples. The feature you need may already be supported by OpenLayers itself. Understanding the basic OpenLayers approach will also make third-party code easier to adapt and troubleshoot.
+
+## 7. Troubleshooting: where to start
+
+When your webmap does not behave as expected, try these steps in order:
+
+1. **Save your files** and check that you are editing the intended project.
+2. **Read the terminal output.** Development tools often report missing packages, syntax errors or failed builds here.
+3. **Open the browser's developer tools.** In most desktop browsers, press `F12` or right-click the page and choose *Inspect*. Check the **Console** for JavaScript errors and the **Network** tab for files or map tiles that fail to load.
+4. **Check filenames and paths.** A typo or difference in capitalisation can stop a data file or script from loading, particularly after publishing to a case-sensitive server.
+5. **Check your imports and brackets.** A missing quotation mark, comma, closing bracket or incorrect import path can prevent JavaScript from running.
+6. **Check the documentation and examples.** Make sure the method or option you are using exists in the version of OpenLayers installed in your project.
+7. **Change one thing at a time.** This makes it easier to identify which change caused the problem.
+
+If you ask for help, include the relevant code, the exact error message from the Console or terminal, and a short description of what you expected to happen. Remove passwords, API keys or other private information before sharing code.
+
+## 8. Keep learning
+
+You do not need to memorise every OpenLayers function. A useful skill is learning how to find, understand and adapt a working example.
+
+- Start with the [OpenLayers documentation](https://openlayers.org/doc/).
+- Search the [official examples](https://openlayers.org/en/latest/examples/) for a feature similar to the one you want.
+- Read the documentation for any third-party library before installing it.
+- Experiment on a copy of your project so you can return to a working version if something goes wrong.
