@@ -6,7 +6,7 @@ The tutorial introduces the main concepts and guides you through building your o
 
  **[Open the tutorial](https://utu-geospatial-labs.github.io/openlayers-tutorial/)** to view the published learning materials.
 
- **[Resulted OpenLayers webmap](https://utu-geospatial-labs.github.io/openlayers-webmap/)
+ [Resulted OpenLayers webmap](https://utu-geospatial-labs.github.io/openlayers-webmap/)
  
 
 You can also explore the source files and contribute to the tutorial through this repository.
