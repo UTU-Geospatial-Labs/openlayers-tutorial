@@ -31,6 +31,7 @@ You will start with a basic map and gradually develop it by adding geospatial da
 </iframe>
 
 [Open the webmap full-screen](https://utu-geospatial-labs.github.io/openlayers-webmap/)
+
 [View the source-code of edited files](https://utu-geospatial-labs.github.io/openlayers-tutorial/full-source-code.html)
 
 :::
