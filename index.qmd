@@ -130,5 +130,31 @@ No additional restrictions — You may not apply legal terms or technological-me
 ### OpenLayers code, dataset, and other third-party resources
 The OpenLayers source code and datasets used in the resulted example webmap are licensed with their original terms. If you copy or share this whole instructional material, make sure to follow the terms and licenses of the third-party resource providers when appropriate.
 
+
+
+<div class="completion-counter">
+  <strong id="completion-count">…</strong>
+  <span>reported tutorial completions 🎉</span>
+</div>
+
+<script>
+fetch(
+  "https://api.github.com/repos/UTU-Geospatial-Labs/openlayers-tutorial/issues/1#issue-5921734963"
+)
+  .then(response => {
+    if (!response.ok) throw new Error("Counter unavailable");
+    return response.json();
+  })
+  .then(data => {
+    document.getElementById("completion-count").textContent =
+      data.reactions.hooray ?? 0;
+  })
+  .catch(() => {
+    document.getElementById("completion-count").textContent = "—";
+  });
+</script>
+
+
+
 - [Visit the tutorial repository on GitHub](https://github.com/UTU-Geospatial-Labs/openlayers-tutorial)
 - [Learn more about OpenLayers](https://openlayers.org/)
