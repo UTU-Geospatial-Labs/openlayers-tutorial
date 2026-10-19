@@ -134,7 +134,7 @@ The OpenLayers source code and datasets used in the resulted example webmap are 
 
 <div class="completion-counter">
   <strong id="completion-count">…</strong>
-  <span>reported tutorial completions 🎉</span>
+  <span> reported tutorial completions 🎉</span>
 </div>
 
 <script>
