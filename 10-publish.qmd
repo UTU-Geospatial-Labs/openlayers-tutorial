@@ -112,3 +112,15 @@ You have built a webmap that combines remote WMS data and local GeoJSON, styles 
 
 The same workflow can be adapted to other datasets and topics. Start by changing the data, then update the styles, legend, title and information text so that they accurately describe your own map.
 
+---
+
+## 🎉 Finished the tutorial?
+
+Would you like to add your effort to our community completion counter on the homepage?
+
+If you have completed the tutorial and would like to participate, visit our GitHub completion page and add a 🎉 reaction.
+
+**[Count my completion](https://github.com/UTU-Geospatial-Labs/openlayers-tutorial/issues/1#issue-5921734963)**
+
+Participation is voluntary. You need to be signed in to GitHub to react. The counter represents self-reported completions and does not certify mastery of the material.
+
